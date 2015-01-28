@@ -2,7 +2,7 @@
  * KeyListener for the Game Engine.
  *
  * @author Tero Pykälämäki
- * @version 2014.1214
+ * @version 2015.0128
  * @since 1.7
  */
 import java.awt.event.KeyAdapter;
@@ -18,7 +18,23 @@ class GameKeyListener extends KeyAdapter {
     @Override
     public void keyPressed(KeyEvent e) {
         // Example
-        System.out.println(e.getKeyChar() + " " + e.getKeyCode());
+        // System.out.println(e.getKeyChar() + " " + e.getKeyCode());
+        
+    	if(e.getKeyCode() == Keybindings.UP || 
+    			e.getKeyCode() == Keybindings.UP_ALT) {
+    		// move player up;
+    	} else if(e.getKeyCode() == Keybindings.DOWN || 
+    			e.getKeyCode() == Keybindings.DOWN_ALT) {
+    		// move player down;
+    	}
+    	
+    	if(e.getKeyCode() == Keybindings.RIGHT || 
+    			e.getKeyCode() == Keybindings.RIGHT_ALT) {
+    		// move player right;
+    	} else if(e.getKeyCode() == Keybindings.LEFT || 
+    			e.getKeyCode() == Keybindings.LEFT_ALT) {
+    		// move player left;
+    	}
     }
     
     /**
