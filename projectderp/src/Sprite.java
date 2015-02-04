@@ -5,8 +5,10 @@
  * @version 2014.1217
  * @since 1.7
  */
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Graphics;
+import java.awt.geom.AffineTransform;
 
 class Sprite {
     
@@ -76,6 +78,31 @@ class Sprite {
     private double scale;
     
     /**
+     * Determines if Sprite is horizontally mirrored.
+     */
+    private int flip;
+    
+    /**
+     * Calculational aid value used in flipping the image.
+     */
+    private int flipValue;
+    
+    /**
+     * Determines if the Sprite's position needs correcting.
+     */
+    private int flipReposition;
+    
+    /**
+     * Handles rotation and flipping of Image.
+     */
+    private AffineTransform tr;
+    
+    /**
+     * Determines the angle of the image rotation in radians.
+     */
+    private double rotation;
+    
+    /**
      * Creates a non-animated Sprite.
      *
      * @param img Image depicting whatever the Sprite is intended to be.
@@ -125,6 +152,11 @@ class Sprite {
         frame = 0;
         reversedImage = false;
         scale = 1.0;
+        flip = 0;
+        flipValue = 1;
+        flipReposition = 0;
+        tr = new AffineTransform();
+        rotation = 0;
     }
     
     /**
@@ -145,12 +177,45 @@ class Sprite {
     }
     
     /**
+     * Sets the angle the Sprite is shown at.
+     * 
+     * The rotational radian value is calculated from the given parameter.
+     * The parameter should have a degree value for accuracy.
+     * 
+     * @param degrees Determines the angle of Sprite.
+     */
+    public void rotation(double degrees) {
+    	rotation = (degrees * flipValue) * Math.PI / 180;
+    }
+    
+    /**
+     * Flips the Sprite's image horizontally.
+     */
+    public void flip() {
+    	if (flip != 0) {
+    		flipValue = -1;
+    		flipReposition = frameWidth;
+    	} else {
+    		flipValue = 1;
+    		flipReposition = 0;
+    	}
+    }
+    
+    /**
      * Paints the Sprite.
      *
      * @param g Currently active Graphics object.
      */
     public void draw(Graphics g) {
-        // Destination coordinates 1 & 2 then source image coordinates 1 & 2.
+        Graphics2D g2d = (Graphics2D) g;
+    	
+        tr.setTransform(flipValue, 0, 0, 1, flipReposition+posX, 0+posY);
+        tr.rotate(rotation, frameWidth/2, frameHeight/2);
+        
+        g2d.drawImage(image, tr, null);
+        
+    	/*
+    	// Destination coordinates 1 & 2 then source image coordinates 1 & 2.
         if (reversedImage == false) {
             g.drawImage(image, 
                         posX, 
@@ -174,6 +239,7 @@ class Sprite {
                         imageHeight, 
                         null);
         }
+        */
     }
     
     /**
