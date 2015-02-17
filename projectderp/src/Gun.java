@@ -60,4 +60,20 @@ public class Gun extends Sprite {
 	public void setPrice(int price) {
 		this.price = price;
 	}
+
+	public double getRange() {
+		return range;
+	}
+
+	public void setRange(double range) {
+		this.range = range;
+	}
+
+	public BulletData getBulletData() {
+		return bulletData;
+	}
+
+	public void setBulletData(BulletData bulletData) {
+		this.bulletData = bulletData;
+	}
 }
