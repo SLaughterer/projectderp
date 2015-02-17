@@ -1,4 +1,10 @@
-
+/**
+ * Gun class to store individual gun properties.
+ *
+ * @author Mikko Jokinen
+ * @version 2015.0217
+ * @since 1.7
+ */
 public class Gun {
 	private String name;
 	private int damage;
