@@ -14,6 +14,10 @@ public class BulletData {
 	private int imageWidth;
 	private int imageHeight;
 	
+	public BulletData(Image img) {
+		this.img = img;
+	}
+	
 	public Image getImg() {
 		return img;
 	}

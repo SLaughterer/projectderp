@@ -16,6 +16,7 @@ public class Gun extends Sprite {
 	private double range;
 	private BulletData bulletData;
 	private Random random;
+	//private int roundsPerMinute;
 	
 	public Gun(GunData data) {
 		super(data.getImg(), data.getFrameWidth(), data.getFrameHeight(),
@@ -31,7 +32,6 @@ public class Gun extends Sprite {
 	
 	public Bullet newBullet() {
 		//laske damage
-		//laske direction
 		int direction = (int) (super.getMovementDirection() + 
 				        (random.nextInt(91) - 45) * (100.0 - accuracy) / 100.0);
 		Bullet bullet = new Bullet(damage, direction, range, bulletData);

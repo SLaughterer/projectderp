@@ -1,0 +1,2 @@
+AK74,.\\res\\derpvivor.png,10,10,10,10,10,10,10,.\\res\\derpvivor.png
+Uzi,.\\res\\derpvivor.png,10,10,10,10,10,10,10,.\\res\\derpvivor.png
