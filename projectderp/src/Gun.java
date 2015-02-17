@@ -29,7 +29,7 @@ public class Gun extends Sprite {
 	public Bullet newBullet() {
 		//laske damage
 		//laske direction
-		Bullet bullet = new Bullet(damage, direction, range, bulletData);
+		Bullet bullet = new Bullet(damage, super.getMovementDirection(), range, bulletData);
 		return bullet;
 	}
 	

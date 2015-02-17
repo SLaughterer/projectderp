@@ -23,6 +23,16 @@ class Sprite {
     private int posY;
     
     /**
+     * Sprite's traversal speed.
+     */
+    private int movementSpeed;
+	
+    /**
+     * Sprite's traversal direction in degrees. (0 - 359.999...)
+     */
+    private int movementDirection;
+	
+    /**
      * Horizontal movement speed. Used with move().
      */
     private int movementX;
@@ -176,6 +186,20 @@ class Sprite {
         }
     }
     
+    public void rotate(int value) {
+    	int direction = movementDirection + value;
+    	
+    	while (direction >= 360) {
+    		direction = direction - 360;
+    	}
+    	
+    	while (direction < 0) {
+    		direction = direction + 360;
+    	}
+    	
+    	rotation(direction);
+    }
+    
     /**
      * Sets the angle the Sprite is shown at.
      * 
@@ -184,7 +208,8 @@ class Sprite {
      * 
      * @param degrees Determines the angle of Sprite.
      */
-    public void rotation(double degrees) {
+    public void rotation(int degrees) {
+    	setMovementDirection(degrees);
     	rotation = (degrees * flipValue) * Math.PI / 180;
     }
     
@@ -397,7 +422,29 @@ class Sprite {
         return posY;
     }
     
-    /**
+    public int getMovementSpeed() {
+		return movementSpeed;
+	}
+
+	public void setMovementSpeed(int movementSpeed) {
+		this.movementSpeed = movementSpeed;
+	}
+
+	public int getMovementDirection() {
+		return movementDirection;
+	}
+
+	public void setMovementDirection(int degrees) {
+		if (degrees >= 0) {
+			while(degrees >= 360) {
+				degrees = degrees - 360;
+			}
+			
+			this.movementDirection = degrees;
+		}
+	}
+
+	/**
      * Changes the Sprite's size.
      *
      * @param scale The scaling value for the Sprite.

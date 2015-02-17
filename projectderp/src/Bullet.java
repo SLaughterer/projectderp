@@ -16,7 +16,7 @@ public class Bullet extends Sprite {
 			  data.getImageWidth(), data.getImageHeight());
 		// TODO Auto-generated constructor stub
 		this.damage = damage;
-		this.direction = direction;
+		super.rotation(direction);
 		this.range = range;
 	}	
 }
