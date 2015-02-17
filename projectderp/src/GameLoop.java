@@ -13,9 +13,17 @@ class GameLoop implements Runnable {
     private final int FPS = 30;
     
     /**
+     * 
+     */
+    private GameWindow host;
+    
+    /**
      * Constructs the game loop object and thread.
      */
-    public GameLoop() {
+    public GameLoop(GameWindow host) {
+    	
+    	this.host = host;
+    	
         Thread thread = new Thread(this);
         thread.start();
     }
@@ -36,6 +44,8 @@ class GameLoop implements Runnable {
             time = System.currentTimeMillis();
             
             // Start loop.
+            
+            host.repaint();
             
             System.out.println("looping");
             

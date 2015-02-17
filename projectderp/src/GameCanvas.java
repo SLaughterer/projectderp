@@ -12,12 +12,25 @@ import java.awt.Toolkit;
 
 class GameCanvas extends JPanel {
     
+	private Player player;
+	
+	public GameCanvas(Player host) {
+		
+		player = host;
+			
+		player.setX(50);
+		player.setY(50);
+	}
+    
     /**
      * Draws all graphical data on the Graphics object.
      *
      * @param g The Graphics context in which to paint.
      */
     public void paint(Graphics g) {
+    	
+    	g.fillRect(10, 10, 25, 25);
         
-    }
+    	player.draw(g);
+    } 
 }

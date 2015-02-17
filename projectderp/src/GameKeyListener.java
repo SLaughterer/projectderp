@@ -9,6 +9,13 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 class GameKeyListener extends KeyAdapter {
+	
+	private Player player;
+	
+	public GameKeyListener(Player host) {
+		
+		player = host;	
+	}
     
     /**
      * .
@@ -23,17 +30,21 @@ class GameKeyListener extends KeyAdapter {
     	if(e.getKeyCode() == Keybindings.UP || 
     			e.getKeyCode() == Keybindings.UP_ALT) {
     		// move player up;
+    		player.move(-1, Keybindings.UP);
+    		
     	} else if(e.getKeyCode() == Keybindings.DOWN || 
     			e.getKeyCode() == Keybindings.DOWN_ALT) {
-    		// move player down;
+    		player.move(-1, Keybindings.DOWN);		
     	}
     	
     	if(e.getKeyCode() == Keybindings.RIGHT || 
     			e.getKeyCode() == Keybindings.RIGHT_ALT) {
     		// move player right;
+    		player.move(Keybindings.RIGHT, -1);
     	} else if(e.getKeyCode() == Keybindings.LEFT || 
     			e.getKeyCode() == Keybindings.LEFT_ALT) {
     		// move player left;
+    		player.move(Keybindings.LEFT, -1);
     	}
     }
     

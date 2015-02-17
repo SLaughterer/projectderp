@@ -10,6 +10,13 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 
 class GameMouseListener extends MouseAdapter {
+	
+	private Player player;
+	
+	public GameMouseListener(Player host) {
+		
+		player = host;	
+	}
     
     /**
      * .

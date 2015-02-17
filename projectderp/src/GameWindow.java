@@ -6,7 +6,9 @@
  * @since 1.7
  */
 import javax.swing.JFrame;
+
 import java.awt.Dimension;
+import java.awt.Toolkit;
 
 class GameWindow extends JFrame {
     
@@ -36,14 +38,20 @@ class GameWindow extends JFrame {
     private GameKeyListener keyListener;
     
     /**
+     * 
+     */
+    private Player player;
+    
+    /**
      * Constructs the window used in the game engine.
      */
     public GameWindow() {
         windowWidth = 600;
         windowHeight = 500;
-        canvas = new GameCanvas();
-        mouseListener = new GameMouseListener();
-        keyListener = new GameKeyListener();
+        player = new Player(Toolkit.getDefaultToolkit().createImage("res/derpvivor.png"), 64, 64);
+        canvas = new GameCanvas(player);
+        mouseListener = new GameMouseListener(player);
+        keyListener = new GameKeyListener(player);
         
         canvas.setPreferredSize(
                 new Dimension(windowWidth, windowHeight));
