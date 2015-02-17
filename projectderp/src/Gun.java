@@ -1,4 +1,5 @@
 import java.awt.Image;
+import java.util.Random;
 
 /**
  * Gun class to store individual gun properties.
@@ -10,10 +11,11 @@ import java.awt.Image;
 public class Gun extends Sprite {
 	private String name;
 	private int damage;
-	private double accuracy;
+	private int accuracy;
 	private int price;
 	private double range;
 	private BulletData bulletData;
+	private Random random;
 	
 	public Gun(GunData data) {
 		super(data.getImg(), data.getFrameWidth(), data.getFrameHeight(),
@@ -24,12 +26,15 @@ public class Gun extends Sprite {
 		this.price = data.getPrice();
 		this.range = data.getRange();
 		this.bulletData = data.getBulletData();
+		random = new Random();
 	}
 	
 	public Bullet newBullet() {
 		//laske damage
 		//laske direction
-		Bullet bullet = new Bullet(damage, super.getMovementDirection(), range, bulletData);
+		int direction = (int) (super.getMovementDirection() + 
+				        (random.nextInt(91) - 45) * (100.0 - accuracy) / 100.0);
+		Bullet bullet = new Bullet(damage, direction, range, bulletData);
 		return bullet;
 	}
 	
@@ -48,10 +53,10 @@ public class Gun extends Sprite {
 	public void setDamage(int damage) {
 		this.damage = damage;
 	}
-	public double getAccuracy() {
+	public int getAccuracy() {
 		return accuracy;
 	}
-	public void setAccuracy(double accuracy) {
+	public void setAccuracy(int accuracy) {
 		this.accuracy = accuracy;
 	}
 	public int getPrice() {

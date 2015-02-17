@@ -15,13 +15,13 @@ public class GunData {
 	private int imageWidth;
 	private int imageHeight;
 	private int damage;
-	private double accuracy;
+	private int accuracy;
 	private int price;
 	private double range;
 	private BulletData bulletData;
 	
 	public GunData (String name, Image img, int frameWidth, int frameHeight,
-                    int imageWidth, int imageHeight, int damage, double accuracy,
+                    int imageWidth, int imageHeight, int damage, int accuracy,
 			        int price, double range, BulletData bulletData) {
 		this.name = name;
 		this.img = img;
@@ -92,11 +92,11 @@ public class GunData {
 		this.damage = damage;
 	}
 
-	public double getAccuracy() {
+	public int getAccuracy() {
 		return accuracy;
 	}
 
-	public void setAccuracy(double accuracy) {
+	public void setAccuracy(int accuracy) {
 		this.accuracy = accuracy;
 	}
 
