@@ -2,7 +2,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.LinkedList;
-import java.util.Scanner;
 
 /**
  * Guns in the game are here.
@@ -30,6 +29,10 @@ public class GunManager {
 	private LinkedList<GunData> armory = new LinkedList<GunData>();
 	private LinkedList<Gun> guns = new LinkedList<Gun>();
 	
+	public GunManager() {
+		initialize();
+	}
+	
 	public String open(String fileName) {
         String text = "";
         
@@ -48,7 +51,7 @@ public class GunManager {
 	}
 
 	public void initialize() {
-		String rawData = open(".\\res\\Guns.txt");
+		String rawData = open("res/Guns.txt");
 		String[] rawGuns = rawData.split(";");
 		
 		for(int i = 0; i < rawGuns.length; i++) {
