@@ -106,7 +106,7 @@ public class Player extends Sprite {
     		setMovementX(getMovementSpeed() * -1);
     	}
     	
-    	move();
+    	//move();
     }
     
     public void stopVerticalMovement() {
