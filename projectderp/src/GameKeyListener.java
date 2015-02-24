@@ -27,22 +27,15 @@ class GameKeyListener extends KeyAdapter {
         // Example
         // System.out.println(e.getKeyChar() + " " + e.getKeyCode());
         
-    	if(e.getKeyCode() == Keybindings.UP || 
-    			e.getKeyCode() == Keybindings.UP_ALT) {
+    	if(e.getKeyCode() == Keybindings.UP) {
     		// move player up;
     		player.moves(Player.UP);
-    		
-    	} else if(e.getKeyCode() == Keybindings.DOWN || 
-    			e.getKeyCode() == Keybindings.DOWN_ALT) {
+    	} else if(e.getKeyCode() == Keybindings.DOWN) {
     		player.moves(Player.DOWN);		
-    	}
-    	
-    	if(e.getKeyCode() == Keybindings.RIGHT || 
-    			e.getKeyCode() == Keybindings.RIGHT_ALT) {
+    	} else if(e.getKeyCode() == Keybindings.RIGHT) {
     		// move player right;
     		player.moves(Player.RIGHT);
-    	} else if(e.getKeyCode() == Keybindings.LEFT || 
-    			e.getKeyCode() == Keybindings.LEFT_ALT) {
+    	} else if(e.getKeyCode() == Keybindings.LEFT) {
     		// move player left;
     		player.moves(Player.LEFT);
     	}
@@ -55,17 +48,11 @@ class GameKeyListener extends KeyAdapter {
      */
     @Override
     public void keyReleased(KeyEvent e) {
-    	if(e.getKeyCode() == Keybindings.UP || 
-    			e.getKeyCode() == Keybindings.UP_ALT ||
-    			e.getKeyCode() == Keybindings.DOWN || 
-    			e.getKeyCode() == Keybindings.DOWN_ALT) {
+    	if(e.getKeyCode() == Keybindings.UP ||
+    			e.getKeyCode() == Keybindings.DOWN) {
     		player.stopVerticalMovement();		
-    	}
-    	
-    	if(e.getKeyCode() == Keybindings.RIGHT || 
-    			e.getKeyCode() == Keybindings.RIGHT_ALT ||
-    			e.getKeyCode() == Keybindings.LEFT || 
-    			e.getKeyCode() == Keybindings.LEFT_ALT) {
+    	} else if(e.getKeyCode() == Keybindings.RIGHT ||
+    			e.getKeyCode() == Keybindings.LEFT) {
     		// move player left;
     		player.stopHorizontalMovement();
     	}
