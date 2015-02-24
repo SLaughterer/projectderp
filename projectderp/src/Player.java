@@ -12,12 +12,17 @@ public class Player extends Sprite {
 	/**
 	 * Determines how quickly player moves.
 	 */
-	private int movementSpeed;
+	//private int movementSpeed; Sprite has this attribute.
 	
 	/**
 	 * Determines Player-object's initial movement speed.
 	 */
 	public final static int DEFAULT_SPEED = 5;
+	
+	public final static int UP = 0;
+	public final static int RIGHT = 1;
+	public final static int DOWN = 2;
+	public final static int LEFT = 3;
 	
 	/**
      * Creates a non-animated Player sprite.
@@ -55,7 +60,7 @@ public class Player extends Sprite {
      * Initializes Player-object's attributes.
      */
     private void initializePlayer() {
-        movementSpeed = Player.DEFAULT_SPEED;
+        super.setMovementSpeed(Player.DEFAULT_SPEED);
     }
     
     /**
@@ -73,20 +78,42 @@ public class Player extends Sprite {
     	
     	if(keyCodeY == Keybindings.UP || 
     			keyCodeY == Keybindings.UP_ALT) {
-    		movementY = movementSpeed * -1;
+    		movementY = super.getMovementSpeed() * -1;
     	} else if(keyCodeY == Keybindings.DOWN || 
     			keyCodeY == Keybindings.DOWN_ALT) {
-    		movementY = movementSpeed;
+    		movementY = super.getMovementSpeed();
     	}
     	
     	if(keyCodeX == Keybindings.RIGHT || 
     			keyCodeX == Keybindings.RIGHT_ALT) {
-    		movementX = movementSpeed;
+    		movementX = super.getMovementSpeed();
     	} else if(keyCodeX == Keybindings.LEFT || 
     			keyCodeX == Keybindings.LEFT_ALT) {
-    		movementX = movementSpeed * -1;
+    		movementX = super.getMovementSpeed() * -1;
     	}
     	
     	super.move(movementX, movementY);
+    }
+    
+    public void moves(int value) {
+    	if (value == UP) {
+    		setMovementY(getMovementSpeed() * -1);
+    	} else if (value == RIGHT) {
+    		setMovementX(getMovementSpeed());
+    	} else if (value == DOWN) {
+    		setMovementY(getMovementSpeed());
+    	} else if (value == LEFT) {
+    		setMovementX(getMovementSpeed() * -1);
+    	}
+    	
+    	move();
+    }
+    
+    public void stopVerticalMovement() {
+    	setMovementY(0);
+    }
+    
+    public void stopHorizontalMovement() {
+    	setMovementX(0);
     }
 }

@@ -474,6 +474,7 @@ class Sprite {
 			}
 			
 			this.movementDirection = degrees;
+			calculateMovement();
 		}
 	}
 

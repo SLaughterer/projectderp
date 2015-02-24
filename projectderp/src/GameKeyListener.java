@@ -30,21 +30,21 @@ class GameKeyListener extends KeyAdapter {
     	if(e.getKeyCode() == Keybindings.UP || 
     			e.getKeyCode() == Keybindings.UP_ALT) {
     		// move player up;
-    		player.move(-1, Keybindings.UP);
+    		player.moves(Player.UP);
     		
     	} else if(e.getKeyCode() == Keybindings.DOWN || 
     			e.getKeyCode() == Keybindings.DOWN_ALT) {
-    		player.move(-1, Keybindings.DOWN);		
+    		player.moves(Player.DOWN);		
     	}
     	
     	if(e.getKeyCode() == Keybindings.RIGHT || 
     			e.getKeyCode() == Keybindings.RIGHT_ALT) {
     		// move player right;
-    		player.move(Keybindings.RIGHT, -1);
+    		player.moves(Player.RIGHT);
     	} else if(e.getKeyCode() == Keybindings.LEFT || 
     			e.getKeyCode() == Keybindings.LEFT_ALT) {
     		// move player left;
-    		player.move(Keybindings.LEFT, -1);
+    		player.moves(Player.LEFT);
     	}
     }
     
@@ -55,6 +55,19 @@ class GameKeyListener extends KeyAdapter {
      */
     @Override
     public void keyReleased(KeyEvent e) {
-        
+    	if(e.getKeyCode() == Keybindings.UP || 
+    			e.getKeyCode() == Keybindings.UP_ALT ||
+    			e.getKeyCode() == Keybindings.DOWN || 
+    			e.getKeyCode() == Keybindings.DOWN_ALT) {
+    		player.stopVerticalMovement();		
+    	}
+    	
+    	if(e.getKeyCode() == Keybindings.RIGHT || 
+    			e.getKeyCode() == Keybindings.RIGHT_ALT ||
+    			e.getKeyCode() == Keybindings.LEFT || 
+    			e.getKeyCode() == Keybindings.LEFT_ALT) {
+    		// move player left;
+    		player.stopHorizontalMovement();
+    	}
     }
 }
