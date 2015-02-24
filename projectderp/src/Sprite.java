@@ -313,6 +313,39 @@ class Sprite {
     }
     
     /**
+     * Calculates movementX and -Y values from movementDirection.
+     * 
+     * Limits directional movement to 8 compass directions.
+     */
+    private void calculateMovement() {
+    	if (movementDirection > 22 && movementDirection <= 67) {
+    		movementX = movementSpeed;
+    		movementY = -movementSpeed;
+    	} else if (movementDirection > 67 && movementDirection <= 112) {
+    		movementX = movementSpeed;
+    		movementY = 0;
+    	} else if (movementDirection > 112 && movementDirection <= 157) {
+    		movementX = movementSpeed;
+    		movementY = movementSpeed;
+    	} else if (movementDirection > 157 && movementDirection <= 202) {
+    		movementX = 0;
+    		movementY = movementSpeed;
+    	} else if (movementDirection > 202 && movementDirection <= 247) {
+    		movementX = -movementSpeed;
+    		movementY = movementSpeed;
+    	} else if (movementDirection > 247 && movementDirection <= 292) {
+    		movementX = -movementSpeed;
+    		movementY = 0;
+    	} else if (movementDirection > 292 && movementDirection <= 337) {
+    		movementX = -movementSpeed;
+    		movementY = -movementSpeed;
+    	} else {
+    		movementX = 0;
+    		movementY = -movementSpeed;
+    	}
+    }
+    
+    /**
      * Adjusts the Sprite's coordinate position according to set values.
      */
     public void move() {
