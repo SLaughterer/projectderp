@@ -59,6 +59,5 @@ public class GunManager {
 			GunData gunData = new GunData(rawGun);
 			armory.add(gunData);
 		}
-
 	}
 }
