@@ -526,12 +526,14 @@ class Sprite {
 	}
 	
 	public void setFacingDirection(int degrees) {
-		if (degrees >= 0) {
-			facingDirection = checkDegrees(degrees);
-		}
+		facingDirection = checkDegrees(degrees);
 	}
 	
 	private int checkDegrees(int degrees) {
+		while(degrees < 0) {
+			degrees = degrees + 360;
+		}
+		
 		while(degrees >= 360) {
 			degrees = degrees - 360;
 		}
