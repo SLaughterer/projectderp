@@ -33,6 +33,11 @@ class Sprite {
     private int movementDirection;
 	
     /**
+     * The direction that the Sprite is looking towards/image rotation.
+     */
+    private int facingDirection;
+    
+    /**
      * Horizontal movement speed. Used with move().
      */
     private int movementX;
@@ -187,7 +192,7 @@ class Sprite {
     }
     
     public void rotate(int value) {
-    	int direction = movementDirection + value;
+    	int direction = facingDirection + value;
     	
     	while (direction >= 360) {
     		direction = direction - 360;
@@ -209,7 +214,7 @@ class Sprite {
      * @param degrees Determines the angle of Sprite.
      */
     public void rotation(int degrees) {
-    	setMovementDirection(degrees);
+    	setFacingDirection(degrees);
     	rotation = (degrees * flipValue) * Math.PI / 180;
     }
     
@@ -310,6 +315,39 @@ class Sprite {
     public void changeMovement(int directionX, int directionY) {
         movementX = directionX;
         movementY = directionY;
+    }
+    
+    /**
+     * Calculates movementX and -Y values from movementDirection.
+     * 
+     * Limits directional movement to 8 compass directions.
+     */
+    private void calculateMovement() {
+    	if (movementDirection > 22 && movementDirection <= 67) {
+    		movementX = movementSpeed;
+    		movementY = -movementSpeed;
+    	} else if (movementDirection > 67 && movementDirection <= 112) {
+    		movementX = movementSpeed;
+    		movementY = 0;
+    	} else if (movementDirection > 112 && movementDirection <= 157) {
+    		movementX = movementSpeed;
+    		movementY = movementSpeed;
+    	} else if (movementDirection > 157 && movementDirection <= 202) {
+    		movementX = 0;
+    		movementY = movementSpeed;
+    	} else if (movementDirection > 202 && movementDirection <= 247) {
+    		movementX = -movementSpeed;
+    		movementY = movementSpeed;
+    	} else if (movementDirection > 247 && movementDirection <= 292) {
+    		movementX = -movementSpeed;
+    		movementY = 0;
+    	} else if (movementDirection > 292 && movementDirection <= 337) {
+    		movementX = -movementSpeed;
+    		movementY = -movementSpeed;
+    	} else {
+    		movementX = 0;
+    		movementY = -movementSpeed;
+    	}
     }
     
     /**
@@ -436,14 +474,29 @@ class Sprite {
 
 	public void setMovementDirection(int degrees) {
 		if (degrees >= 0) {
-			while(degrees >= 360) {
-				degrees = degrees - 360;
-			}
-			
-			this.movementDirection = degrees;
+			this.movementDirection = checkDegrees(degrees);
+			calculateMovement();
 		}
 	}
 
+	public int getFacingDirection() {
+		return facingDirection;
+	}
+	
+	public void setFacingDirection(int degrees) {
+		if (degrees >= 0) {
+			facingDirection = checkDegrees(degrees);
+		}
+	}
+	
+	private int checkDegrees(int degrees) {
+		while(degrees >= 360) {
+			degrees = degrees - 360;
+		}
+		
+		return degrees;
+	}
+	
 	/**
      * Changes the Sprite's size.
      *

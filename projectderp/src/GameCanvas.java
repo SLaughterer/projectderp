@@ -31,6 +31,7 @@ class GameCanvas extends JPanel {
     	
     	g.fillRect(10, 10, 25, 25);
         
+    	player.move();
     	player.draw(g);
     } 
 }
