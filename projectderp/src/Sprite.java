@@ -174,6 +174,15 @@ class Sprite {
         rotation = 0;
     }
     
+    public static int calculateDirection(
+    		int startX, int startY, int endX, int endY) {
+    	int direction = -1; 
+    	
+    	direction = (int)(Math.atan2(endY - startY, endX - startX) * 180 / Math.PI);
+    	
+    	return direction + 90;
+    }
+    
     /**
      * Calculates the amount of frames the newly created Sprite contains.
      *

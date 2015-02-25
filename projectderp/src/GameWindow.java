@@ -56,7 +56,7 @@ class GameWindow extends JFrame {
         player = new Player(Toolkit.getDefaultToolkit().createImage("res/derpvivor.png"), 64, 64);
         canvas = new GameCanvas(player);
         mouseListener = new GameMouseListener(player);
-        mouseMotionListener = new GameMouseMotionListener();
+        mouseMotionListener = new GameMouseMotionListener(player);
         keyListener = new GameKeyListener(player);
         
         canvas.setPreferredSize(
