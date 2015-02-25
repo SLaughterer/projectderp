@@ -8,9 +8,17 @@
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import javax.swing.JFrame;
+
 class GameKeyListener extends KeyAdapter {
 	
 	private Player player;
+	private JFrame window;
+	
+	public GameKeyListener(JFrame window) {
+		
+		this.window = window;
+	}
 	
 	public GameKeyListener(Player host) {
 		
@@ -27,17 +35,19 @@ class GameKeyListener extends KeyAdapter {
         // Example
         // System.out.println(e.getKeyChar() + " " + e.getKeyCode());
         
-    	if(e.getKeyCode() == Keybindings.UP) {
-    		// move player up;
-    		player.moves(Player.UP);
-    	} else if(e.getKeyCode() == Keybindings.DOWN) {
-    		player.moves(Player.DOWN);		
-    	} else if(e.getKeyCode() == Keybindings.RIGHT) {
-    		// move player right;
-    		player.moves(Player.RIGHT);
-    	} else if(e.getKeyCode() == Keybindings.LEFT) {
-    		// move player left;
-    		player.moves(Player.LEFT);
+	   if (player != null) {
+	    	if(e.getKeyCode() == Keybindings.UP) {
+	    		// move player up;
+	    		player.moves(Player.UP);
+	    	} else if(e.getKeyCode() == Keybindings.DOWN) {
+	    		player.moves(Player.DOWN);		
+	    	} else if(e.getKeyCode() == Keybindings.RIGHT) {
+	    		// move player right;
+	    		player.moves(Player.RIGHT);
+	    	} else if(e.getKeyCode() == Keybindings.LEFT) {
+	    		// move player left;
+	    		player.moves(Player.LEFT);
+	    	}
     	}
     }
     
@@ -48,13 +58,16 @@ class GameKeyListener extends KeyAdapter {
      */
     @Override
     public void keyReleased(KeyEvent e) {
-    	if(e.getKeyCode() == Keybindings.UP ||
-    			e.getKeyCode() == Keybindings.DOWN) {
-    		player.stopVerticalMovement();		
-    	} else if(e.getKeyCode() == Keybindings.RIGHT ||
-    			e.getKeyCode() == Keybindings.LEFT) {
-    		// move player left;
-    		player.stopHorizontalMovement();
-    	}
+    	
+ 	    if (player != null) {
+	    	if(e.getKeyCode() == Keybindings.UP ||
+	    			e.getKeyCode() == Keybindings.DOWN) {
+	    		player.stopVerticalMovement();		
+	    	} else if(e.getKeyCode() == Keybindings.RIGHT ||
+	    			e.getKeyCode() == Keybindings.LEFT) {
+	    		// move player left;
+	    		player.stopHorizontalMovement();
+	    	}
+ 	    }
     }
 }

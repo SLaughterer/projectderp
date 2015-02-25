@@ -13,6 +13,10 @@ class GameMouseListener extends MouseAdapter {
 	
 	private Player player;
 	
+	public GameMouseListener() {
+		
+	}
+	
 	public GameMouseListener(Player host) {
 		
 		player = host;	
