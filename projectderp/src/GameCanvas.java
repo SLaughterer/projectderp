@@ -48,6 +48,7 @@ class GameCanvas extends JPanel {
 					
     public void userInterface() {
     	
+    	// minigun is placeholder
     	currentGun = new Sprite(Toolkit.getDefaultToolkit().createImage("res/Minigun.png"), 64, 64);
     	currentGun.rotation(90);
     	currentGun.setX(gameWindow.getWindowWidth()/2 - currentGun.getWidth());
