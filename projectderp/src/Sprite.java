@@ -23,6 +23,15 @@ class Sprite {
     private int posY;
     
     /**
+     * Centered X coordinate calculated from image given to Sprite.
+     */
+    private int anchorX;
+    /**
+     * Centered Y coordinate calculated from image given to Sprite.
+     */
+    private int anchorY;
+    
+    /**
      * Sprite's traversal speed.
      */
     private int movementSpeed;
@@ -469,7 +478,23 @@ class Sprite {
         return posY;
     }
     
-    public int getMovementSpeed() {
+    public int getAnchorX() {
+		return anchorX;
+	}
+
+	public void setAnchorX(int anchorX) {
+		this.anchorX = anchorX;
+	}
+
+	public int getAnchorY() {
+		return anchorY;
+	}
+
+	public void setAnchorY(int anchorY) {
+		this.anchorY = anchorY;
+	}
+
+	public int getMovementSpeed() {
 		return movementSpeed;
 	}
 
