@@ -47,7 +47,7 @@ class GameLoop implements Runnable {
             
             host.repaint();
             
-            System.out.println("looping");
+            //System.out.println("looping");
             
             // End loop.
             
