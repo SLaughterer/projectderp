@@ -34,9 +34,7 @@ class GameCanvas extends JPanel {
     public void paint(Graphics g) {
     	
     	super.paint(g);
-    	
-    	g.fillRect(10, 10, 25, 25);
-        
+    	        
     	if (player != null) {
 	    	player.move();
 	    	player.draw(g);

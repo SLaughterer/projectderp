@@ -65,7 +65,6 @@ class MenuWindow extends JFrame implements ActionListener {
         setTitle("Menu Window");
         pack();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-//        setVisible(true);
         
         menu();
     }
@@ -91,10 +90,8 @@ class MenuWindow extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		
 		System.out.println("testing");
-		
-//		requestFocusInWindow();
-		
-		GameWindow gameWindow = new GameWindow();
+				
+		GameWindow gameWindow = new GameWindow(this);
 		GameLoop gameLoop = new GameLoop(gameWindow);	
 		
 		setVisible(false);
