@@ -5,6 +5,7 @@
  * @version 2015.0128
  * @since 1.7
  */
+import java.awt.KeyboardFocusManager;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -14,15 +15,20 @@ class GameKeyListener extends KeyAdapter {
 	
 	private Player player;
 	private JFrame window;
+	private KeyboardFocusManager k;
 	
 	public GameKeyListener(JFrame window) {
 		
 		this.window = window;
+		
+		k = KeyboardFocusManager.getCurrentKeyboardFocusManager();
 	}
 	
 	public GameKeyListener(Player host) {
 		
 		player = host;	
+		
+		k = KeyboardFocusManager.getCurrentKeyboardFocusManager();
 	}
     
     /**
@@ -35,7 +41,7 @@ class GameKeyListener extends KeyAdapter {
         // Example
         // System.out.println(e.getKeyChar() + " " + e.getKeyCode());
         
-	   if (player != null) {
+	   if (k.getActiveWindow() instanceof GameWindow) {
 	    	if(e.getKeyCode() == Keybindings.UP) {
 	    		// move player up;
 	    		player.moves(Player.UP);
@@ -59,7 +65,7 @@ class GameKeyListener extends KeyAdapter {
     @Override
     public void keyReleased(KeyEvent e) {
     	
- 	    if (player != null) {
+ 	    if (k.getActiveWindow() instanceof GameWindow) {
 	    	if(e.getKeyCode() == Keybindings.UP ||
 	    			e.getKeyCode() == Keybindings.DOWN) {
 	    		player.stopVerticalMovement();		
