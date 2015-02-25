@@ -24,6 +24,8 @@ public class Player extends Sprite {
 	public final static int DOWN = 2;
 	public final static int LEFT = 3;
 	
+	public int health = 100;
+	
 	/**
      * Creates a non-animated Player sprite.
      *
@@ -115,5 +117,24 @@ public class Player extends Sprite {
     
     public void stopHorizontalMovement() {
     	setMovementX(0);
+    }
+    
+    public void setHealth(int newHealth) {
+    	
+    	health = newHealth;
+    }
+    
+    public int getHealth() {
+    	
+    	return health;
+    }
+    
+    public void changeHealthBy(int damage) {
+    	
+    	health += damage;
+    	
+    	if (health < 0) {
+    		health = 0;
+    	}
     }
 }
