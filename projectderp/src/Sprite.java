@@ -8,6 +8,7 @@
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.geom.AffineTransform;
 
 class Sprite {
@@ -192,6 +193,13 @@ class Sprite {
     	direction = (int)(Math.atan2(endY - startY, endX - startX) * 180 / Math.PI);
     	
     	return direction + 90;
+    }
+    
+    public static int calculateDirection(int startX, int startY, Point endPoint) {
+    	int endX = endPoint.x;
+    	int endY = endPoint.y;
+    	
+    	return calculateDirection(startX, startY, endX, endY);
     }
     
     /**
