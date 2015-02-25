@@ -14,6 +14,10 @@ class GameCanvas extends JPanel {
     
 	private Player player;
 	
+	public GameCanvas() {
+		
+	}
+	
 	public GameCanvas(Player host) {
 		
 		player = host;
@@ -29,9 +33,13 @@ class GameCanvas extends JPanel {
      */
     public void paint(Graphics g) {
     	
+    	super.paint(g);
+    	
     	g.fillRect(10, 10, 25, 25);
         
-    	player.move();
-    	player.draw(g);
+    	if (player != null) {
+	    	player.move();
+	    	player.draw(g);
+    	}
     } 
 }
