@@ -23,6 +23,15 @@ class Sprite {
     private int posY;
     
     /**
+     * Centered X coordinate calculated from image given to Sprite.
+     */
+    private int anchorX;
+    /**
+     * Centered Y coordinate calculated from image given to Sprite.
+     */
+    private int anchorY;
+    
+    /**
      * Sprite's traversal speed.
      */
     private int movementSpeed;
@@ -125,9 +134,9 @@ class Sprite {
      * @param imageHeight The height of parameter img.
      */
     public Sprite(Image img, int imageWidth, int imageHeight) {
-        initialize(img, imageWidth, imageHeight);
-        frameWidth = imageWidth;
+    	frameWidth = imageWidth;
         frameHeight = imageHeight;
+    	initialize(img, imageWidth, imageHeight);        
         maxFrames = 1;
     }
     
@@ -145,9 +154,9 @@ class Sprite {
      */
     public Sprite(Image img, int frameWidth, int frameHeight, 
                             int imageWidth, int imageHeight) {
-        initialize(img, imageWidth, imageHeight);
-        this.frameWidth = frameWidth;
+    	this.frameWidth = frameWidth;
         this.frameHeight = frameHeight;
+    	initialize(img, imageWidth, imageHeight);
         calculateFrames();
     }
     
@@ -161,6 +170,8 @@ class Sprite {
     private void initialize(Image img, int imageWidth, int imageHeight) {
         posX = 0;
         posY = 0;
+        anchorX = frameWidth / 2;
+        anchorY = frameHeight / 2;
         this.imageWidth = imageWidth;
         this.imageHeight = imageHeight;
         image = img;
@@ -172,6 +183,15 @@ class Sprite {
         flipReposition = 0;
         tr = new AffineTransform();
         rotation = 0;
+    }
+    
+    public static int calculateDirection(
+    		int startX, int startY, int endX, int endY) {
+    	int direction = -1; 
+    	
+    	direction = (int)(Math.atan2(endY - startY, endX - startX) * 180 / Math.PI);
+    	
+    	return direction + 90;
     }
     
     /**
@@ -356,6 +376,8 @@ class Sprite {
     public void move() {
         posX += movementX;
         posY += movementY;
+        anchorX += movementX;
+        anchorY += movementY;
     }
     
     /**
@@ -367,6 +389,8 @@ class Sprite {
     public void move(int directionX, int directionY) {
         posX += directionX;
         posY += directionY;
+        anchorX += directionX;
+        anchorY += directionY;
     }
     
     /**
@@ -430,7 +454,8 @@ class Sprite {
      * @param newX Sprite's new horizontal position.
      */
     public void setX(int newX) {
-        posX = newX;
+        anchorX = anchorX + (newX - posX);
+    	posX = newX;
     }
     
     /**
@@ -448,7 +473,8 @@ class Sprite {
      * @param newY Sprite's new vertical position.
      */
     public void setY(int newY) {
-        posY = newY;
+        anchorY = anchorY + (newY - posY);
+    	posY = newY;
     }
     
     /**
@@ -460,7 +486,23 @@ class Sprite {
         return posY;
     }
     
-    public int getMovementSpeed() {
+    public int getAnchorX() {
+		return anchorX;
+	}
+
+	public void setAnchorX(int anchorX) {
+		this.anchorX = anchorX;
+	}
+
+	public int getAnchorY() {
+		return anchorY;
+	}
+
+	public void setAnchorY(int anchorY) {
+		this.anchorY = anchorY;
+	}
+
+	public int getMovementSpeed() {
 		return movementSpeed;
 	}
 

@@ -33,6 +33,11 @@ class GameWindow extends JFrame {
     private GameMouseListener mouseListener;
     
     /**
+     * Tracks mouse movement.
+     */
+    private GameMouseMotionListener mouseMotionListener;
+
+    /**
      * Tracks keyboard activity.
      */
     private GameKeyListener keyListener;
@@ -51,6 +56,7 @@ class GameWindow extends JFrame {
         player = new Player(Toolkit.getDefaultToolkit().createImage("res/derpvivor.png"), 64, 64);
         canvas = new GameCanvas(player);
         mouseListener = new GameMouseListener(player);
+        mouseMotionListener = new GameMouseMotionListener(player);
         keyListener = new GameKeyListener(player);
         
         canvas.setPreferredSize(
@@ -58,6 +64,7 @@ class GameWindow extends JFrame {
         
         canvas.addMouseListener(mouseListener);
         canvas.addMouseWheelListener(mouseListener);
+        canvas.addMouseMotionListener(mouseMotionListener);
         this.addKeyListener(keyListener);
         
         add(canvas);
