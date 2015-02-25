@@ -6,13 +6,16 @@
  * @since 1.7
  */
 import javax.swing.JPanel;
+
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.MouseInfo;
 import java.awt.Toolkit;
 
 class GameCanvas extends JPanel {
     
 	private Player player;
+	private MouseInfo mouse;
 	
 	public GameCanvas() {
 		
@@ -36,8 +39,11 @@ class GameCanvas extends JPanel {
     	super.paint(g);
     	        
     	if (player != null) {
-	    	player.move();
-	    	player.draw(g);
+    		player.move();
+    		player.rotation(Sprite.calculateDirection(
+    				player.getAnchorX(), player.getAnchorY(), 
+    				mouse.getPointerInfo().getLocation()));
+    		player.draw(g);
     	}
     } 
 }
