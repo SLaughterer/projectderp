@@ -183,19 +183,20 @@ class Sprite {
         flipValue = 1;
         flipReposition = 0;
         tr = new AffineTransform();
-        rotation = 0;
+        rotation(0);
     }
     
-    public static int calculateDirection(
+    public static double calculateDirection(
     		int startX, int startY, int endX, int endY) {
-    	int direction = -1; 
-    	
-    	direction = (int)(Math.atan2(endY - startY, endX - startX) * 180 / Math.PI);
+    	double direction = -1; 
+    	//System.out.println(startX + " + " + endX);
+    	System.out.println(startY + " + " + endY);
+    	direction = (Math.atan2(endY - startY, endX - startX) * 180.0 / Math.PI);
     	
     	return direction + 90;
     }
     
-    public static int calculateDirection(int startX, int startY, Point endPoint) {
+    public static double calculateDirection(int startX, int startY, Point endPoint) {
     	int endX = endPoint.x;
     	int endY = endPoint.y;
     	
@@ -221,15 +222,6 @@ class Sprite {
     
     public void rotate(int value) {
     	int direction = facingDirection + value;
-    	
-    	while (direction >= 360) {
-    		direction = direction - 360;
-    	}
-    	
-    	while (direction < 0) {
-    		direction = direction + 360;
-    	}
-    	
     	rotation(direction);
     }
     
@@ -241,7 +233,8 @@ class Sprite {
      * 
      * @param degrees Determines the angle of Sprite.
      */
-    public void rotation(int degrees) {
+    public void rotation(double degrees) {
+    	degrees = checkDegrees(degrees);
     	setFacingDirection(degrees);
     	rotation = (degrees * flipValue) * Math.PI / 180;
     }
@@ -462,8 +455,8 @@ class Sprite {
      * @param newX Sprite's new horizontal position.
      */
     public void setX(int newX) {
-        anchorX = anchorX + (newX - posX);
-    	posX = newX;
+        posX = newX;
+        anchorX = posX + frameWidth / 2;
     }
     
     /**
@@ -481,8 +474,8 @@ class Sprite {
      * @param newY Sprite's new vertical position.
      */
     public void setY(int newY) {
-        anchorY = anchorY + (newY - posY);
-    	posY = newY;
+        posY = newY;
+        anchorY = posY + frameHeight / 2;
     }
     
     /**
@@ -524,7 +517,7 @@ class Sprite {
 
 	public void setMovementDirection(int degrees) {
 		if (degrees >= 0) {
-			this.movementDirection = checkDegrees(degrees);
+			this.movementDirection = (int) checkDegrees(degrees);
 			calculateMovement();
 		}
 	}
@@ -533,11 +526,11 @@ class Sprite {
 		return facingDirection;
 	}
 	
-	public void setFacingDirection(int degrees) {
-		facingDirection = checkDegrees(degrees);
+	public void setFacingDirection(double degrees) {
+		facingDirection = (int) checkDegrees(degrees);
 	}
 	
-	private int checkDegrees(int degrees) {
+	private double checkDegrees(double degrees) {
 		while(degrees < 0) {
 			degrees = degrees + 360;
 		}

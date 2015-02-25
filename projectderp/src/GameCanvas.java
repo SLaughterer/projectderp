@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.MouseInfo;
+import java.awt.Point;
 import java.awt.Toolkit;
 
 class GameCanvas extends JPanel {
@@ -42,8 +43,16 @@ class GameCanvas extends JPanel {
     		player.move();
     		player.rotation(Sprite.calculateDirection(
     				player.getAnchorX(), player.getAnchorY(), 
-    				mouse.getPointerInfo().getLocation()));
+    				mousePosition()));
     		player.draw(g);
     	}
-    } 
+    }
+    
+    private Point mousePosition() {
+    	Point point = mouse.getPointerInfo().getLocation();
+    	Point canvasPoint = this.getLocationOnScreen();
+    	point.setLocation(point.x - canvasPoint.x, point.y - canvasPoint.y);
+    	
+    	return point;
+    }
 }
