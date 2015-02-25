@@ -10,23 +10,26 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 class GameKeyListener extends KeyAdapter {
 	
 	private Player player;
-	private JFrame window;
+	private GameWindow gameWindow;
+	private MenuWindow menuWindow;
 	private KeyboardFocusManager k;
 	
-	public GameKeyListener(JFrame window) {
+	public GameKeyListener(MenuWindow menuWindow) {
 		
-		this.window = window;
-		
+		this.menuWindow = menuWindow;
+				
 		k = KeyboardFocusManager.getCurrentKeyboardFocusManager();
 	}
-	
-	public GameKeyListener(Player host) {
+		
+	public GameKeyListener(Player host, GameWindow gameWindow) {
 		
 		player = host;	
+		this.gameWindow = gameWindow;
 		
 		k = KeyboardFocusManager.getCurrentKeyboardFocusManager();
 	}
@@ -53,6 +56,18 @@ class GameKeyListener extends KeyAdapter {
 	    	} else if(e.getKeyCode() == Keybindings.LEFT) {
 	    		// move player left;
 	    		player.moves(Player.LEFT);
+	    	} else if (e.getKeyCode() == Keybindings.ESCAPE) {
+	    		
+	    		int confirm = JOptionPane.showOptionDialog(null, 
+						   "Do you want to return to menu?", "Menu confirmation", 
+						   JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+	    		
+	    		// converting the numbers to the ones used by the closeWindow-method
+	            if (confirm == 0) {
+	            	confirm = 2;	         	
+	            }
+	            
+	    		gameWindow.closeWindow(confirm);
 	    	}
     	}
     }
