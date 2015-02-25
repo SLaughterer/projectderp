@@ -12,6 +12,7 @@ public interface Keybindings {
 	int DOWN = KeyEvent.VK_S;
 	int LEFT = KeyEvent.VK_A;
 	int RIGHT = KeyEvent.VK_D;
+	int ESCAPE = KeyEvent.VK_ESCAPE;
 	
 	int UP_ALT = KeyEvent.VK_UP;
 	int DOWN_ALT = KeyEvent.VK_DOWN;

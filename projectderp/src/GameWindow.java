@@ -70,7 +70,7 @@ class GameWindow extends JFrame {
         canvas = new GameCanvas(player);
         mouseListener = new GameMouseListener(player);
         mouseMotionListener = new GameMouseMotionListener(player);
-        keyListener = new GameKeyListener(player);
+        keyListener = new GameKeyListener(player, this);
         
         canvas.setPreferredSize(
                 new Dimension(windowWidth, windowHeight));
@@ -99,18 +99,24 @@ class GameWindow extends JFrame {
                 int confirm = JOptionPane.showOptionDialog(null, 
                 										   "Are You Sure to Close Application?", "Exit Confirmation", 
                 										   JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[2]);
-                if (confirm == 0) {
-                	System.exit(0);
-             	
-                } else if (confirm == 2) {
-                	menu.setVisible(true);
-                	dispose();
-                }
+
+                closeWindow(confirm);
             }
         };
         
         addWindowListener(exitListener);
         
         setVisible(true);
+    }
+    
+    public void closeWindow(int confirm) {
+    
+        if (confirm == 0) {
+        	System.exit(0);
+     	
+        } else if (confirm == 2) {
+        	menu.setVisible(true);
+        	dispose();
+        }	
     }
 }
