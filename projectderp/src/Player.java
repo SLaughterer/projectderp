@@ -25,6 +25,7 @@ public class Player extends Sprite {
 	public final static int LEFT = 3;
 	
 	public int health = 100;
+	public int score = 100;
 	
 	/**
      * Creates a non-animated Player sprite.
@@ -127,6 +128,16 @@ public class Player extends Sprite {
     public int getHealth() {
     	
     	return health;
+    }
+    
+    public void addScore(int adding) {
+    	
+    	score += adding;
+    }
+    
+    public int getScore() {
+    	
+    	return score;
     }
     
     public void changeHealthBy(int damage) {

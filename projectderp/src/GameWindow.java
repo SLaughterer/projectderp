@@ -67,7 +67,7 @@ class GameWindow extends JFrame {
         windowWidth = 600;
         windowHeight = 500;
         player = new Player(Toolkit.getDefaultToolkit().createImage("res/derpvivor.png"), 64, 64);
-        canvas = new GameCanvas(player);
+        canvas = new GameCanvas(player, this);
         mouseListener = new GameMouseListener(player);
         mouseMotionListener = new GameMouseMotionListener(player);
         keyListener = new GameKeyListener(player, this);
@@ -107,6 +107,16 @@ class GameWindow extends JFrame {
         addWindowListener(exitListener);
         
         setVisible(true);
+    }
+    
+    public int getWindowWidth() {
+    	
+    	return windowWidth;
+    }
+    
+    public int getWindowHeight() {
+    	
+    	return windowHeight;
     }
     
     public void closeWindow(int confirm) {
