@@ -71,7 +71,13 @@ class GameCanvas extends JPanel {
     		
     		enemies.moveEnemies();
     		enemies.drawEnemies(g);
-    		    		
+    		enemies.shoot();
+    		
+    		gunManager.drawGuns(g);
+    		
+    		bulletManager.moveBullets();
+    		bulletManager.drawBullets(g);
+    		
     		// healthbar
     		g.drawString("HEALTH", 15, 15);
     		g.setColor(Color.RED);
