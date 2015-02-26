@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.BorderLayout;
 
-class MenuWindow extends JFrame implements ActionListener {
+class MenuWindow extends JFrame {
     
     /**
      * Objects added here are shown in the game engine's window.
@@ -43,6 +43,8 @@ class MenuWindow extends JFrame implements ActionListener {
      */
     
     private JButton playButton, optionsButton;
+    
+    private MenuWindow menuWindow = this;
     
     public MenuWindow() {
         windowWidth = 600;
@@ -83,18 +85,29 @@ class MenuWindow extends JFrame implements ActionListener {
         canvas.add( playButton, BorderLayout.LINE_START);
         canvas.add( optionsButton, BorderLayout.CENTER);
              
-        playButton.addActionListener(this);
-                
+        playButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		
+        		System.out.println("testing");
+        				
+        		GameWindow gameWindow = new GameWindow(menuWindow);
+        		GameLoop gameLoop = new GameLoop(gameWindow);	
+        		
+        		setVisible(false);
+        	}  	
+        });
+        
+        optionsButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		
+        		System.out.println("options");
+        				
+        		//setVisible(false);
+        	}  	
+        });
+             
         setVisible(true);     
     }
    
-	public void actionPerformed(ActionEvent arg0) {
-		
-		System.out.println("testing");
-				
-		GameWindow gameWindow = new GameWindow(this);
-		GameLoop gameLoop = new GameLoop(gameWindow);	
-		
-		setVisible(false);
-	}
+
 }
