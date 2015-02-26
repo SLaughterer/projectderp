@@ -42,7 +42,7 @@ class MenuWindow extends JFrame implements ActionListener {
      * Constructs the window used in the game engine.
      */
     
-    private JButton testiButton, testiButton2;
+    private JButton playButton, optionsButton;
     
     public MenuWindow() {
         windowWidth = 600;
@@ -71,18 +71,19 @@ class MenuWindow extends JFrame implements ActionListener {
     
     public void menu() {
     	
-    	ImageIcon testIcon = new ImageIcon("res/menuButton.png");
+    	ImageIcon playButtonIcon = new ImageIcon("res/playButton.png");
+    	ImageIcon optionsButtonIcon = new ImageIcon("res/optionsButton.png");
     	
-        testiButton = new JButton(testIcon);        
-        testiButton2 = new JButton(testIcon);
+        playButton = new JButton(playButtonIcon);        
+        optionsButton = new JButton(optionsButtonIcon);
         
-        testiButton.setPreferredSize(new Dimension(140, 60));
-        testiButton2.setPreferredSize(new Dimension(140, 60));
+        playButton.setPreferredSize(new Dimension(140, 60));
+        optionsButton.setPreferredSize(new Dimension(140, 60));
               
-        canvas.add( testiButton, BorderLayout.LINE_START);
-        canvas.add( testiButton2, BorderLayout.CENTER);
+        canvas.add( playButton, BorderLayout.LINE_START);
+        canvas.add( optionsButton, BorderLayout.CENTER);
              
-        testiButton.addActionListener(this);
+        playButton.addActionListener(this);
                 
         setVisible(true);     
     }
