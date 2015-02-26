@@ -44,12 +44,6 @@ class GameCanvas extends JPanel {
     	// minigun is placeholder
     	currentGun = new Sprite(Toolkit.getDefaultToolkit().createImage("res/Minigun.png"), 64, 64);
     	currentGun.rotation(90);
-    	
-		// testing
-		player.addScore(1);
-		
-		System.out.println(currentGun.getX() + " " + currentGun.getY());
-		System.out.println("Player: " + player.getX() + " " + player.getY());
     }    
 
     /**
@@ -87,15 +81,18 @@ class GameCanvas extends JPanel {
     		g.drawString(String.format("%08d", player.getScore()), dimension.width - 75, 30);
     		    		    		   
     		// current gun
-    		updateCurrentGunPos();
+    		updateUserInterface();
     		currentGun.draw(g);
     	}
     }
     
-    public void updateCurrentGunPos() {
+    public void updateUserInterface() {
     	
     	currentGun.setX(dimension.width/2 - currentGun.getWidth());
     	currentGun.setY(-25);
+    	
+    	// testing
+    	player.addScore(1);
     }
     
     private Point mousePosition() {

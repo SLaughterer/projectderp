@@ -119,12 +119,19 @@ class GameWindow extends JFrame {
     	return windowHeight;
     }
     
-    public void closeWindow(int confirm) {
+    /**
+     * Closes the GameWindow. 
+     * 
+     * Either by closing the whole game or just returning to menu.
+     * 
+     * @param choice Determines what is closed.
+     */
+    public void closeWindow(int choice) {
     
-        if (confirm == 0) {
+        if (choice == 0) {
         	System.exit(0);
      	
-        } else if (confirm == 2) {
+        } else if (choice == 2) {
         	menu.setVisible(true);
         	dispose();
         }	
