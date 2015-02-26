@@ -17,6 +17,7 @@ class GameCanvas extends JPanel {
     
 	private Player player;
 	private MouseInfo mouse;
+	private EnemyManager enemies;
 	
 	public GameCanvas() {
 		
@@ -28,6 +29,9 @@ class GameCanvas extends JPanel {
 			
 		player.setX(50);
 		player.setY(50);
+		
+		enemies = new EnemyManager(player);
+		enemies.createEnemy();
 	}
     
     /**
@@ -45,6 +49,9 @@ class GameCanvas extends JPanel {
     				player.getAnchorX(), player.getAnchorY(), 
     				mousePosition()));
     		player.draw(g);
+    		
+    		enemies.moveEnemies();
+    		enemies.drawEnemies(g);
     	}
     }
     
