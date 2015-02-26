@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.BorderLayout;
 
-class MenuWindow extends JFrame {
+class OptionsWindow extends JFrame {
     
     /**
      * Objects added here are shown in the game engine's window.
@@ -41,12 +41,10 @@ class MenuWindow extends JFrame {
     /**
      * Constructs the window used in the game engine.
      */
+
+    private JButton menuButton;
     
-    private JButton playButton, optionsButton;
-    
-    private MenuWindow menuWindow = this;
-    
-    public MenuWindow() {
+    public OptionsWindow() {
         windowWidth = 600;
         windowHeight = 500;
         canvas = new GameCanvas();
@@ -64,50 +62,32 @@ class MenuWindow extends JFrame {
         
         // Add components here.
         
-        setTitle("Menu Window");
+        setTitle("Options Window");
         pack();
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        
-        menu();
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+     
+        options();
+     
+        setVisible(true);
     }
     
-    public void menu() {
+    public void options() {
     	
-    	ImageIcon playButtonIcon = new ImageIcon("res/playButton.png");
-    	ImageIcon optionsButtonIcon = new ImageIcon("res/optionsButton.png");
+    	ImageIcon menuButtonIcon = new ImageIcon("res/menuButton.png");
     	
-        playButton = new JButton(playButtonIcon);        
-        optionsButton = new JButton(optionsButtonIcon);
+    	menuButton = new JButton(menuButtonIcon);        
         
-        playButton.setPreferredSize(new Dimension(140, 60));
-        optionsButton.setPreferredSize(new Dimension(140, 60));
+    	menuButton.setPreferredSize(new Dimension(140, 60));
               
-        canvas.add( playButton, BorderLayout.LINE_START);
-        canvas.add( optionsButton, BorderLayout.CENTER);
+        canvas.add( menuButton, BorderLayout.LINE_START);
              
-        playButton.addActionListener(new ActionListener() {
+        menuButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
         		
-        		System.out.println("testing");
-        				
-        		GameWindow gameWindow = new GameWindow(menuWindow);
-        		GameLoop gameLoop = new GameLoop(gameWindow);	
+        		System.out.println("testing menu");
         		
-        		setVisible(false);
+        		dispose();
         	}  	
-        });
-        
-        optionsButton.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent arg0) {
-        		
-        		System.out.println("options");
-        		
-        		OptionsWindow optionsWindow = new OptionsWindow();
-        				
-        		//setVisible(false);
-        	}  	
-        });
-             
-        setVisible(true);     
+        });  
     }
 }
