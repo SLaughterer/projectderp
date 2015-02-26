@@ -69,6 +69,8 @@ class MenuWindow extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
         menu();
+        
+        setVisible(true);
     }
     
     public void menu() {
@@ -106,8 +108,6 @@ class MenuWindow extends JFrame {
         				
         		//setVisible(false);
         	}  	
-        });
-             
-        setVisible(true);     
+        });   
     }
 }
