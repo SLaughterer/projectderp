@@ -190,7 +190,7 @@ class Sprite {
     		int startX, int startY, int endX, int endY) {
     	double direction = -1; 
     	//System.out.println(startX + " + " + endX);
-    	System.out.println(startY + " + " + endY);
+    	//System.out.println(startY + " + " + endY);
     	direction = (Math.atan2(endY - startY, endX - startX) * 180.0 / Math.PI);
     	
     	return direction + 90;
