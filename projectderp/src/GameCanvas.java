@@ -21,7 +21,9 @@ import java.awt.Color.*;
 class GameCanvas extends JPanel {
     
 	private Player player;
-	private MouseInfo mouse;
+	private GameWindow gameWindow;
+	private MouseInfo mouse;		
+	private Sprite currentGun;
 	private EnemyManager enemies;
 	
 //	private Sprite minigun;
@@ -43,16 +45,15 @@ class GameCanvas extends JPanel {
 		
 		userInterface();
 	}
-			
+					
     public void userInterface() {
     	
-    	minigun = new Sprite(Toolkit.getDefaultToolkit().createImage("res/Minigun.png"), 64, 64);
-		minigun.rotation(90);
-    	minigun.setX(gameWindow.getWindowWidth()/2 - minigun.getWidth());
-    	minigun.setY(-25);
-    	
-    }
-    
+    	currentGun = new Sprite(Toolkit.getDefaultToolkit().createImage("res/Minigun.png"), 64, 64);
+    	currentGun.rotation(90);
+    	currentGun.setX(gameWindow.getWindowWidth()/2 - currentGun.getWidth());
+    	currentGun.setY(-25);
+    }    
+
     /**
      * Draws all graphical data on the Graphics object.
      *
@@ -71,7 +72,7 @@ class GameCanvas extends JPanel {
     		
     		enemies.moveEnemies();
     		enemies.drawEnemies(g);
-    		    		    		
+    		
     		g.drawString("HEALTH", 15, 15);
     		g.setColor(Color.RED);
     		g.fillRect(15, 20, player.getHealth(), 20);
@@ -79,12 +80,12 @@ class GameCanvas extends JPanel {
     		g.setColor(Color.BLACK);
     		
     		g.drawString("SCORE", gameWindow.getWindowWidth() - 75, 15);
-    		g.drawString("" + player.getScore(), gameWindow.getWindowWidth() - 53, 30);
+    		g.drawString(String.format("%08d", player.getScore()), gameWindow.getWindowWidth() - 75, 30);
     		
     		// testing
     		player.addScore(1);
     		    		
-    		minigun.draw(g);
+    		currentGun.draw(g);
     		
     	}
     }
