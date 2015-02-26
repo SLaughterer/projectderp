@@ -9,10 +9,14 @@ import java.awt.Image;
  */
 public class BulletData {
 	private Image img;
-	private int frameWidth;
-	private int frameHeight;
-	private int imageWidth;
-	private int imageHeight;
+	private int frameWidth = 64;
+	private int frameHeight = 64;
+	private int imageWidth = 64;
+	private int imageHeight = 64;
+	
+	public BulletData(Image img) {
+		this.img = img;
+	}
 	
 	public Image getImg() {
 		return img;

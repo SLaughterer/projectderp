@@ -5,6 +5,7 @@
  * @version 2014.1217
  * @since 1.7
  */
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import java.awt.Color;
@@ -20,6 +21,8 @@ class GameCanvas extends JPanel {
 	private MouseInfo mouse;		
 	private Sprite currentGun;
 	private EnemyManager enemies;
+	GunManager gunManager = new GunManager();
+	BulletManager bulletManager = new BulletManager();
 	private Dimension dimension;
 		
 	public GameCanvas() {
@@ -68,7 +71,13 @@ class GameCanvas extends JPanel {
     		
     		enemies.moveEnemies();
     		enemies.drawEnemies(g);
-    		    		
+    		enemies.shoot();
+    		
+    		gunManager.drawGuns(g);
+    		
+    		bulletManager.moveBullets();
+    		bulletManager.drawBullets(g);
+    		
     		// healthbar
     		g.drawString("HEALTH", 15, 15);
     		g.setColor(Color.RED);

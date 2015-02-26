@@ -1,5 +1,3 @@
-import java.awt.Image;
-
 /**
  * Bullet class to store individual bullet properties.
  *
@@ -9,14 +7,18 @@ import java.awt.Image;
  */
 public class Bullet extends Sprite {
 	private int damage;
-	private double range;
+	private int range;
 	
-	public Bullet(int damage, int direction, double range, BulletData data) {
+	public Bullet(int damage, int direction, int range, BulletData data, int x, int y) {
 		super(data.getImg(), data.getFrameWidth(), data.getFrameHeight(),
 			  data.getImageWidth(), data.getImageHeight());
 		// TODO Auto-generated constructor stub
 		this.damage = damage;
-		super.rotation(direction);
+		setMovementSpeed(5);
+		rotation(direction);
+		setMovementDirection(direction);
 		this.range = range;
+		this.setX(x);
+		this.setY(y);
 	}	
 }

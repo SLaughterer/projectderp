@@ -1,4 +1,4 @@
-import java.awt.Image;
+import java.util.Random;
 
 /**
  * Gun class to store individual gun properties.
@@ -10,10 +10,16 @@ import java.awt.Image;
 public class Gun extends Sprite {
 	private String name;
 	private int damage;
-	private double accuracy;
+	private int accuracy;
 	private int price;
-	private double range;
+	private int range;
+	private int roundsPerMinute;
+	private int cooldown;
+	private int clipSize;
+	private int reloadTime;
+	private int bulletsInClip;
 	private BulletData bulletData;
+	private Random random;
 	
 	public Gun(GunData data) {
 		super(data.getImg(), data.getFrameWidth(), data.getFrameHeight(),
@@ -24,13 +30,44 @@ public class Gun extends Sprite {
 		this.price = data.getPrice();
 		this.range = data.getRange();
 		this.bulletData = data.getBulletData();
+		this.roundsPerMinute = data.getRoundsPerMinute();
+		this.clipSize = data.getClipSize();
+		this.reloadTime = data.getReloadTime();
+		bulletsInClip = clipSize;
+		random = new Random();
 	}
 	
-	public Bullet newBullet() {
+	public void shoot() {
+		 if (bulletsInClip == 0) {
+			initializeReload();
+		} else if (cooldown == 0) {
+			BulletManager.addBullet(newBullet());
+			initializeCooldown();
+			bulletsInClip--;
+		}
+	}
+	
+	private Bullet newBullet() {
 		//laske damage
-		//laske direction
-		Bullet bullet = new Bullet(damage, super.getMovementDirection(), range, bulletData);
+		int direction = (int) (getFacingDirection() + 
+				        (random.nextInt(91) - 45) * (100.0 - accuracy) / 100.0);
+		Bullet bullet = new Bullet(damage, direction, range, bulletData, getX(), getY());
 		return bullet;
+	}
+	
+	private void initializeCooldown() {
+		cooldown = 30 / (roundsPerMinute / 60);
+	}
+	
+	private void initializeReload() {
+		cooldown = 30 * reloadTime;
+		bulletsInClip = clipSize;
+	}
+	
+	public void cool() {
+		if (cooldown > 0) {
+			cooldown--;
+		}
 	}
 	
 	public String getName() {
@@ -48,10 +85,10 @@ public class Gun extends Sprite {
 	public void setDamage(int damage) {
 		this.damage = damage;
 	}
-	public double getAccuracy() {
+	public int getAccuracy() {
 		return accuracy;
 	}
-	public void setAccuracy(double accuracy) {
+	public void setAccuracy(int accuracy) {
 		this.accuracy = accuracy;
 	}
 	public int getPrice() {
@@ -59,5 +96,45 @@ public class Gun extends Sprite {
 	}
 	public void setPrice(int price) {
 		this.price = price;
+	}
+
+	public int getRange() {
+		return range;
+	}
+
+	public void setRange(int range) {
+		this.range = range;
+	}
+
+	public int getRoundsPerMinute() {
+		return roundsPerMinute;
+	}
+
+	public void setRoundsPerMinute(int roundsPerMinute) {
+		this.roundsPerMinute = roundsPerMinute;
+	}
+
+	public int getClipSize() {
+		return clipSize;
+	}
+
+	public void setClipSize(int clipSize) {
+		this.clipSize = clipSize;
+	}
+
+	public int getReloadTime() {
+		return reloadTime;
+	}
+
+	public void setReloadTime(int reloadTime) {
+		this.reloadTime = reloadTime;
+	}
+
+	public BulletData getBulletData() {
+		return bulletData;
+	}
+
+	public void setBulletData(BulletData bulletData) {
+		this.bulletData = bulletData;
 	}
 }
