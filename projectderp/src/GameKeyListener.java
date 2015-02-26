@@ -17,6 +17,7 @@ class GameKeyListener extends KeyAdapter {
 	private Player player;
 	private GameWindow gameWindow;
 	private MenuWindow menuWindow;
+	private OptionsWindow optionsWindow;
 	private KeyboardFocusManager k;
 	
 	public GameKeyListener(MenuWindow menuWindow) {
@@ -30,6 +31,13 @@ class GameKeyListener extends KeyAdapter {
 		
 		player = host;	
 		this.gameWindow = gameWindow;
+		
+		k = KeyboardFocusManager.getCurrentKeyboardFocusManager();
+	}
+	
+	public GameKeyListener(OptionsWindow optionsWindow) {
+		
+		this.optionsWindow = optionsWindow;
 		
 		k = KeyboardFocusManager.getCurrentKeyboardFocusManager();
 	}

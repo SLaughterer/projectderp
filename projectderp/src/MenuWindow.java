@@ -4,14 +4,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import java.awt.Dimension;
-import java.awt.Insets;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
 import java.awt.BorderLayout;
 
-class MenuWindow extends JFrame implements ActionListener {
+class MenuWindow extends JFrame {
     
     /**
      * Objects added here are shown in the game engine's window.
@@ -44,6 +41,8 @@ class MenuWindow extends JFrame implements ActionListener {
     
     private JButton playButton, optionsButton;
     
+    private MenuWindow menuWindow = this;
+    
     public MenuWindow() {
         windowWidth = 600;
         windowHeight = 500;
@@ -67,10 +66,12 @@ class MenuWindow extends JFrame implements ActionListener {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
         menu();
+        
+        setVisible(true);
     }
     
     public void menu() {
-    	
+    	    	
     	ImageIcon playButtonIcon = new ImageIcon("res/playButton.png");
     	ImageIcon optionsButtonIcon = new ImageIcon("res/optionsButton.png");
     	
@@ -83,18 +84,27 @@ class MenuWindow extends JFrame implements ActionListener {
         canvas.add( playButton, BorderLayout.LINE_START);
         canvas.add( optionsButton, BorderLayout.CENTER);
              
-        playButton.addActionListener(this);
-                
-        setVisible(true);     
+        playButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		
+        		System.out.println("testing");
+        				
+        		GameWindow gameWindow = new GameWindow(menuWindow);
+        		GameLoop gameLoop = new GameLoop(gameWindow);	
+        		
+        		setVisible(false);
+        	}  	
+        });
+        
+        optionsButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		
+        		System.out.println("options");
+        		
+        		OptionsWindow optionsWindow = new OptionsWindow();
+        				
+        		//setVisible(false);
+        	}  	
+        });   
     }
-   
-	public void actionPerformed(ActionEvent arg0) {
-		
-		System.out.println("testing");
-				
-		GameWindow gameWindow = new GameWindow(this);
-		GameLoop gameLoop = new GameLoop(gameWindow);	
-		
-		setVisible(false);
-	}
 }
