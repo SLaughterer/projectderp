@@ -1,4 +1,3 @@
-import java.awt.Image;
 import java.util.Random;
 
 /**
@@ -13,7 +12,7 @@ public class Gun extends Sprite {
 	private int damage;
 	private int accuracy;
 	private int price;
-	private double range;
+	private int range;
 	private BulletData bulletData;
 	private Random random;
 	//private int roundsPerMinute;
@@ -66,11 +65,11 @@ public class Gun extends Sprite {
 		this.price = price;
 	}
 
-	public double getRange() {
+	public int getRange() {
 		return range;
 	}
 
-	public void setRange(double range) {
+	public void setRange(int range) {
 		this.range = range;
 	}
 

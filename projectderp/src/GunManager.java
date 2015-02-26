@@ -1,3 +1,4 @@
+import java.awt.Graphics;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -26,8 +27,8 @@ public class GunManager {
 		
 	}
 	
-	private LinkedList<GunData> armory = new LinkedList<GunData>();
-	private LinkedList<Gun> guns = new LinkedList<Gun>();
+	public static LinkedList<GunData> armory = new LinkedList<GunData>();
+	private static LinkedList<Gun> guns = new LinkedList<Gun>();
 	
 	public GunManager() {
 		initialize();
@@ -58,6 +59,23 @@ public class GunManager {
 			String[] rawGun = rawGuns[i].split(",");
 			GunData gunData = new GunData(rawGun);
 			armory.add(gunData);
+		}
+	}
+	
+	public static Gun requestGun(GunData data) {
+		Gun gun = new Gun(data);
+		guns.add(gun);
+		return gun;
+	}
+	
+	public LinkedList<GunData> requestArmory() {
+		return armory;
+	}
+	
+	public void drawGuns(Graphics g) {
+		for (int i = 0; i < guns.size(); i++) {
+			guns.get(i).draw(g);
+			//System.out.println("drawing");
 		}
 	}
 }

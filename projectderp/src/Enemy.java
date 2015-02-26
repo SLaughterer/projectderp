@@ -11,18 +11,27 @@ import java.awt.Image;
 public class Enemy extends Sprite {
 	private int health;
 	private int damageModifier;
-	//private Gun gun;
+	private Gun gun;
 	
 	public Enemy(Image img, int imageWidth, int imageHeight) {
 		super(img, imageWidth, imageHeight);
-		
+		initialize();
 	}
 	
 	public Enemy(Image img, int frameWidth, int frameHeight, 
             int imageWidth, int imageHeight) {
 		super(img, frameWidth, frameHeight, imageWidth, imageHeight);
-		
+		initialize();
 	}
+	
+	public void initialize() {
+		getGun();
+	}
+	
+    public void getGun() {
+    	GunData data = GunManager.armory.get(0);
+    	gun = GunManager.requestGun(data);
+    }
 
 	public int getHealth() {
 		return health;
@@ -40,5 +49,12 @@ public class Enemy extends Sprite {
 		this.damageModifier = damageModifier;
 	}
 	
+	@Override
+	public void move() {
+		super.move();
+		gun.rotation(this.getFacingDirection());
+		gun.setX(this.getX());
+		gun.setY(this.getY());
+	}
 	
 }
