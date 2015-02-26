@@ -55,6 +55,11 @@ public class Enemy extends Sprite {
 		gun.rotation(this.getFacingDirection());
 		gun.setX(this.getX());
 		gun.setY(this.getY());
+		
+	}
+	
+	public void shoot() {
+		gun.shoot();
 	}
 	
 }

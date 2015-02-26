@@ -19,6 +19,9 @@ public class GunData {
 	private int accuracy;
 	private int price;
 	private int range;
+	private int roundsPerMinute;
+	private int clipSize;
+	private int reloadTime;
 	private BulletData bulletData;
 	
 	public GunData (String[] data) {
@@ -32,7 +35,10 @@ public class GunData {
 		this.accuracy = Integer.parseInt(data[7]);
 		this.price = Integer.parseInt(data[8]);
 		this.range = Integer.parseInt(data[9]);
-		this.bulletData = new BulletData(Toolkit.getDefaultToolkit().createImage(data[10]));
+		this.roundsPerMinute = Integer.parseInt(data[10]);
+		this.clipSize = Integer.parseInt(data[11]);
+		this.reloadTime = Integer.parseInt(data[12]);
+		this.bulletData = new BulletData(Toolkit.getDefaultToolkit().createImage(data[13]));
 	}
 
 	public String getName() {
@@ -113,6 +119,30 @@ public class GunData {
 
 	public void setRange(int range) {
 		this.range = range;
+	}
+
+	public int getRoundsPerMinute() {
+		return roundsPerMinute;
+	}
+
+	public void setRoundsPerMinute(int roundsPerMinute) {
+		this.roundsPerMinute = roundsPerMinute;
+	}
+
+	public int getClipSize() {
+		return clipSize;
+	}
+
+	public void setClipSize(int clipSize) {
+		this.clipSize = clipSize;
+	}
+
+	public int getReloadTime() {
+		return reloadTime;
+	}
+
+	public void setReloadTime(int reloadTime) {
+		this.reloadTime = reloadTime;
 	}
 
 	public BulletData getBulletData() {

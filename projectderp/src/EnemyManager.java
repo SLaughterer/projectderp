@@ -37,4 +37,12 @@ public class EnemyManager {
 			//System.out.println("drawing");
 		}
 	}
+	
+	public void shoot() {
+		for (int i = 0; i < enemies.size(); i++) {
+			//if enemy sees player
+			enemies.get(i).shoot();
+			//System.out.println("drawing");
+		}
+	}
 }

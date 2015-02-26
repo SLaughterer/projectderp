@@ -22,6 +22,7 @@ class GameCanvas extends JPanel {
 	private Sprite currentGun;
 	private EnemyManager enemies;
 	GunManager gunManager = new GunManager();
+	BulletManager bulletManager = new BulletManager();
 	private Dimension dimension;
 		
 	public GameCanvas() {

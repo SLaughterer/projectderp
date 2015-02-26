@@ -15,18 +15,6 @@ import java.util.LinkedList;
  * @since 1.7
  */
 public class GunManager {
-	
-	/**
-	 * All the bullets are stored and manipulated from here.
-	 *
-	 * @author Mikko Jokinen
-	 * @version 2015.0217
-	 * @since 1.7
-	 */
-	private static class BulletManager {
-		
-	}
-	
 	public static LinkedList<GunData> armory = new LinkedList<GunData>();
 	private static LinkedList<Gun> guns = new LinkedList<Gun>();
 	
@@ -75,6 +63,7 @@ public class GunManager {
 	public void drawGuns(Graphics g) {
 		for (int i = 0; i < guns.size(); i++) {
 			guns.get(i).draw(g);
+			guns.get(i).cool();
 			//System.out.println("drawing");
 		}
 	}
