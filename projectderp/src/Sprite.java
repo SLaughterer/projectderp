@@ -336,69 +336,6 @@ class Sprite {
         
         if (sprite != this) {
         	collides = Hitbox.collisionCheck(this, sprite);
-        	
-        	/*
-        	BufferedImage spriteFrame = sprite.getImage();
-            int thisPixelAlpha;
-        	int spritePixelAlpha;
-        	int spriteFrameWidth = sprite.getFrameWidth();
-        	int spriteFrameHeight = sprite.getFrameHeight();
-        	
-        	for (int i = 0; i < frameHeight; i++) {
-        		for (int n = 0; n < frameWidth; n++) {
-        			thisPixelAlpha = imgSub[0].getAlphaRaster().getSample(n, i, 0);
-        			spritePixelAlpha = spriteFrame.getAlphaRaster().getSample(n, i, 0);
-        			
-        			if (thisPixelAlpha > 160 && spritePixelAlpha > 160) {
-        				collides = true;
-        			}
-        		}
-        	}
-        	
-        	
-        	int spriteX = sprite.getAnchorX();
-            int spriteY = sprite.getAnchorY();
-            int spriteWidth = sprite.getWidth();
-            int spriteHeight = sprite.getHeight();
-            int spriteFacing = sprite.getFacingDirection();
-            double spriteScale = sprite.getScale();
-            double distance = calculateDistance(anchorX, anchorY, spriteX, spriteY);
-            
-            boolean horizontalCollision = false;
-            boolean verticalCollision = false;
-
-            if (posX > spriteX && posX - frameWidth < spriteX) {
-            	// check right side of this and left of sprite
-            	
-            } else if (posX < spriteX && posX + frameWidth > spriteX) {
-            	// check opposite directions
-            }
-            
-            if (posY > spriteY && posY - frameHeight < spriteY) {
-            	// check top side of this and bottom of sprite
-            } else if (posY < spriteY && posY + frameHeight > spriteY) {
-            	// check opposite directions
-            }
-            
-            if (horizontalCollision && verticalCollision) {
-            	collides = true;
-            }
-            
-            /*
-            if ( ( posX + frameWidth * scale >= spriteX && 
-                   posX <= spriteX 
-                   ||
-                   posX >= spriteX && 
-                   posX <= spriteX + spriteWidth * spriteScale )
-                   &&
-                 ( posY + frameHeight * scale >= spriteY && 
-                   posY <= spriteY 
-                   ||
-                   posY >= spriteY && 
-                   posY <= spriteY + spriteHeight * spriteScale ) ) {
-                collides = true;
-            }
-            */
         }
         
         return collides;
@@ -421,6 +358,10 @@ class Sprite {
      * Limits directional movement to 8 compass directions.
      */
     private void calculateMovement() {
+    	movementY = (int)(movementSpeed * Math.sin(Math.toRadians(movementDirection - 90)));
+    	movementX = (int)(movementSpeed * Math.cos(Math.toRadians(movementDirection - 90)));
+    	
+    	/*
     	if (movementDirection > 22 && movementDirection <= 67) {
     		movementX = movementSpeed;
     		movementY = -movementSpeed;
@@ -446,6 +387,7 @@ class Sprite {
     		movementX = 0;
     		movementY = -movementSpeed;
     	}
+    	*/
     }
     
     /**
