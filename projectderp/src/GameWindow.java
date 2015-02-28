@@ -67,7 +67,10 @@ class GameWindow extends JFrame {
     	this.menu = menu;
         windowWidth = 600;
         windowHeight = 500;
+        
         player = new Player("res/2H Stance.png", 64, 64, 64, 64);
+        player.setHitbox(new Hitbox(Hitbox.TYPE_CIRCLE, 16));
+        
         canvas = new GameCanvas(player);
         // acquire memory location of EnemyManager.
         enemies = canvas.getEnemyManager();

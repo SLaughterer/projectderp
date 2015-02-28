@@ -322,32 +322,7 @@ class Sprite {
         }
         
         counter++;
-    	/*
-    	// Destination coordinates 1 & 2 then source image coordinates 1 & 2.
-        if (reversedImage == false) {
-            g.drawImage(image, 
-                        posX, 
-                        posY, 
-                        (int) (posX + (frameWidth * scale)), 
-                        (int) (posY + (imageHeight * scale)), 
-                        frameWidth * frame, 
-                        0, 
-                        frameWidth * frame + frameWidth, 
-                        imageHeight, 
-                        null);
-        } else {
-            g.drawImage(image, 
-                        posX, 
-                        posY, 
-                        (int) (posX + (frameWidth * scale)), 
-                        (int) (posY + (imageHeight * scale)), 
-                        frameWidth * frame + frameWidth, 
-                        0, 
-                        frameWidth * frame, 
-                        imageHeight, 
-                        null);
-        }
-        */
+    	*/
     }
     
     /**
@@ -360,6 +335,8 @@ class Sprite {
         boolean collides = false;
         
         if (sprite != this) {
+        	collides = Hitbox.collisionCheck(this, sprite);
+        	
         	/*
         	BufferedImage spriteFrame = sprite.getImage();
             int thisPixelAlpha;
