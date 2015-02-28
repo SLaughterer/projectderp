@@ -13,13 +13,14 @@ public class EnemyManager {
 	}
 	
 	public void createEnemy() {
-		Enemy newEnemy = new Enemy(Toolkit.getDefaultToolkit().createImage("res/Soldier.png"), 64, 64);
+		Enemy newEnemy = new Enemy("res/Soldier.png", 64, 64, 64, 64);
 		newEnemy.setMovementSpeed(2);
 		enemies.add(newEnemy);
 	}
 	
 	public void moveEnemies() {
 		double direction;
+		double distance;
 		
 		for (int i = 0; i < enemies.size(); i++) {
 			direction = Sprite.calculateDirection(
@@ -27,7 +28,12 @@ public class EnemyManager {
 					player.getAnchorX(), player.getAnchorY());
 			enemies.get(i).rotation(direction);
 			enemies.get(i).setMovementDirection((int) direction);
-			enemies.get(i).move();
+			distance = Sprite.calculateDistance(
+					enemies.get(i).getAnchorX(), enemies.get(i).getAnchorY(), 
+					player.getAnchorX(), player.getAnchorY());
+			if (!enemies.get(i).collidesWith(player) && distance < 200) {
+				enemies.get(i).move();
+			}
 		}
 	}
 	

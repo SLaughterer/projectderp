@@ -1,5 +1,3 @@
-import java.awt.Image;
-
 /**
  * Player class for the Game.
  *
@@ -34,7 +32,7 @@ public class Player extends Sprite {
      * @param imageWidth The width of parameter img.
      * @param imageHeight The height of parameter img.
      */
-    public Player(Image img, int imageWidth, int imageHeight) {
+    public Player(String img, int imageWidth, int imageHeight) {
         super(img, imageWidth, imageHeight);
         
         initializePlayer();
@@ -52,7 +50,7 @@ public class Player extends Sprite {
      * @param imageWidth The width of parameter img.
      * @param imageHeight The height of parameter img.
      */
-    public Player(Image img, int frameWidth, int frameHeight, 
+    public Player(String img, int frameWidth, int frameHeight, 
                             int imageWidth, int imageHeight) {
         super(img, frameWidth, frameHeight, imageWidth, imageHeight);
         
