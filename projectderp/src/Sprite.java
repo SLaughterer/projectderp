@@ -134,7 +134,8 @@ class Sprite {
 
     private BufferedImage imgB;
     private BufferedImage[] imgSub;
-    
+    private Hitbox hitbox;
+     
     /**
      * Creates a non-animated Sprite.
      *
@@ -194,6 +195,7 @@ class Sprite {
         flipReposition = 0;
         tr = new AffineTransform();
         rotation(0);
+        hitbox = new Hitbox(Hitbox.TYPE_CIRCLE, frameWidth / 2);
     }
 
     private void createFrames() {
@@ -320,32 +322,7 @@ class Sprite {
         }
         
         counter++;
-    	/*
-    	// Destination coordinates 1 & 2 then source image coordinates 1 & 2.
-        if (reversedImage == false) {
-            g.drawImage(image, 
-                        posX, 
-                        posY, 
-                        (int) (posX + (frameWidth * scale)), 
-                        (int) (posY + (imageHeight * scale)), 
-                        frameWidth * frame, 
-                        0, 
-                        frameWidth * frame + frameWidth, 
-                        imageHeight, 
-                        null);
-        } else {
-            g.drawImage(image, 
-                        posX, 
-                        posY, 
-                        (int) (posX + (frameWidth * scale)), 
-                        (int) (posY + (imageHeight * scale)), 
-                        frameWidth * frame + frameWidth, 
-                        0, 
-                        frameWidth * frame, 
-                        imageHeight, 
-                        null);
-        }
-        */
+    	*/
     }
     
     /**
@@ -358,6 +335,8 @@ class Sprite {
         boolean collides = false;
         
         if (sprite != this) {
+        	collides = Hitbox.collisionCheck(this, sprite);
+        	
         	/*
         	BufferedImage spriteFrame = sprite.getImage();
             int thisPixelAlpha;
@@ -557,6 +536,14 @@ class Sprite {
 
     public BufferedImage getImage() {
     	return imgSub[frame];
+    }
+    
+    public void setHitbox(Hitbox hitbox) {
+    	this.hitbox = hitbox;
+    }
+    
+    public Hitbox getHitbox() {
+    	return hitbox;
     }
     
     /**
