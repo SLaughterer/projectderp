@@ -13,12 +13,12 @@ public class Enemy extends Sprite {
 	private int damageModifier;
 	private Gun gun;
 	
-	public Enemy(Image img, int imageWidth, int imageHeight) {
+	public Enemy(String img, int imageWidth, int imageHeight) {
 		super(img, imageWidth, imageHeight);
 		initialize();
 	}
 	
-	public Enemy(Image img, int frameWidth, int frameHeight, 
+	public Enemy(String img, int frameWidth, int frameHeight, 
             int imageWidth, int imageHeight) {
 		super(img, frameWidth, frameHeight, imageWidth, imageHeight);
 		initialize();

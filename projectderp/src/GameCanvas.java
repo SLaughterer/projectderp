@@ -45,7 +45,7 @@ class GameCanvas extends JPanel {
     public void userInterface() {
     	
     	// minigun is placeholder
-    	currentGun = new Sprite(Toolkit.getDefaultToolkit().createImage("res/Minigun.png"), 64, 64);
+    	currentGun = new Sprite("res/Minigun.png", 64, 64);
     	currentGun.rotation(90);
     }    
 
@@ -68,6 +68,16 @@ class GameCanvas extends JPanel {
     				player.getAnchorX(), player.getAnchorY(), 
     				mousePosition()));
     		player.draw(g);
+
+    		/*
+    		for (int i = 0; i < 64; i++) {
+        		for (int n = 0; n < 64; n++) {
+        			System.out.print(player.getImage().getAlphaRaster().getSample(n, i, 0));
+        			
+        		}
+        		System.out.println();
+        	}
+        	*/
     		
     		enemies.moveEnemies();
     		enemies.drawEnemies(g);
@@ -110,5 +120,9 @@ class GameCanvas extends JPanel {
     	point.setLocation(point.x - canvasPoint.x, point.y - canvasPoint.y);
     	
     	return point;
+    }
+    
+    public EnemyManager getEnemyManager() {
+    	return enemies;
     }
 }

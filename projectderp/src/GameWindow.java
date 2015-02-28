@@ -9,7 +9,6 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
@@ -50,6 +49,8 @@ class GameWindow extends JFrame {
      * 
      */
     private Player player;
+
+    private EnemyManager enemies;
     
     /**
      * The parent window. It needs to be closed in code because it's hidden 
@@ -66,8 +67,10 @@ class GameWindow extends JFrame {
     	this.menu = menu;
         windowWidth = 600;
         windowHeight = 500;
-        player = new Player(Toolkit.getDefaultToolkit().createImage("res/derpvivor.png"), 64, 64);
+        player = new Player("res/2H Stance.png", 64, 64, 64, 64);
         canvas = new GameCanvas(player);
+        // acquire memory location of EnemyManager.
+        enemies = canvas.getEnemyManager();
         mouseListener = new GameMouseListener(player);
         mouseMotionListener = new GameMouseMotionListener(player);
         keyListener = new GameKeyListener(player, this);
@@ -107,6 +110,10 @@ class GameWindow extends JFrame {
         addWindowListener(exitListener);
         
         setVisible(true);
+    }
+
+    public void checkCollisions() {
+    	// collisions
     }
     
     public int getWindowWidth() {

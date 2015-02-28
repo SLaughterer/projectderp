@@ -10,7 +10,7 @@ import java.awt.Toolkit;
  */
 public class GunData {
 	private String name;
-	private Image img;
+	private String img;
 	private int frameWidth;
 	private int frameHeight;
 	private int imageWidth;
@@ -26,7 +26,7 @@ public class GunData {
 	
 	public GunData (String[] data) {
 		this.name = data[0];
-		this.img = Toolkit.getDefaultToolkit().createImage(data[1]);
+		this.img = data[1];
 		this.frameWidth = Integer.parseInt(data[2]);
 		this.frameHeight = Integer.parseInt(data[3]);
 		this.imageWidth = Integer.parseInt(data[4]);
@@ -38,7 +38,7 @@ public class GunData {
 		this.roundsPerMinute = Integer.parseInt(data[10]);
 		this.clipSize = Integer.parseInt(data[11]);
 		this.reloadTime = Integer.parseInt(data[12]);
-		this.bulletData = new BulletData(Toolkit.getDefaultToolkit().createImage(data[13]));
+		this.bulletData = new BulletData(data[13]);
 	}
 
 	public String getName() {
@@ -49,11 +49,11 @@ public class GunData {
 		this.name = name;
 	}
 
-	public Image getImg() {
+	public String getImg() {
 		return img;
 	}
 
-	public void setImg(Image img) {
+	public void setImg(String img) {
 		this.img = img;
 	}
 

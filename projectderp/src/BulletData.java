@@ -8,21 +8,21 @@ import java.awt.Image;
  * @since 1.7
  */
 public class BulletData {
-	private Image img;
+	private String img;
 	private int frameWidth = 64;
 	private int frameHeight = 64;
 	private int imageWidth = 64;
 	private int imageHeight = 64;
 	
-	public BulletData(Image img) {
+	public BulletData(String img) {
 		this.img = img;
 	}
 	
-	public Image getImg() {
+	public String getImg() {
 		return img;
 	}
 	
-	public void setImg(Image img) {
+	public void setImg(String img) {
 		this.img = img;
 	}
 	

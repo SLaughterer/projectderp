@@ -45,6 +45,7 @@ class GameLoop implements Runnable {
             
             // Start loop.
             
+            host.checkCollisions();
             host.repaint();
             
             //System.out.println("looping");

@@ -6,10 +6,15 @@
  * @since 1.7
  */
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 class Sprite {
     
@@ -80,7 +85,7 @@ class Sprite {
     /**
      * PNG or JPG image given to Sprite.
      */
-    private Image image;
+    private String image;
     
     /**
      * Width of the image given to Sprite.
@@ -126,6 +131,9 @@ class Sprite {
      * Determines the angle of the image rotation in radians.
      */
     private double rotation;
+
+    private BufferedImage imgB;
+    private BufferedImage[] imgSub;
     
     /**
      * Creates a non-animated Sprite.
@@ -134,11 +142,12 @@ class Sprite {
      * @param imageWidth The width of parameter img.
      * @param imageHeight The height of parameter img.
      */
-    public Sprite(Image img, int imageWidth, int imageHeight) {
+    public Sprite(String img, int imageWidth, int imageHeight) {
     	frameWidth = imageWidth;
         frameHeight = imageHeight;
     	initialize(img, imageWidth, imageHeight);        
         maxFrames = 1;
+        createFrames();
     }
     
     /**
@@ -153,12 +162,13 @@ class Sprite {
      * @param imageWidth The width of parameter img.
      * @param imageHeight The height of parameter img.
      */
-    public Sprite(Image img, int frameWidth, int frameHeight, 
+    public Sprite(String img, int frameWidth, int frameHeight, 
                             int imageWidth, int imageHeight) {
     	this.frameWidth = frameWidth;
         this.frameHeight = frameHeight;
     	initialize(img, imageWidth, imageHeight);
         calculateFrames();
+        createFrames();
     }
     
     /**
@@ -168,7 +178,7 @@ class Sprite {
      * @param imageWidth The width of parameter img.
      * @param imageHeight The height of parameter img.
      */
-    private void initialize(Image img, int imageWidth, int imageHeight) {
+    private void initialize(String img, int imageWidth, int imageHeight) {
         posX = 0;
         posY = 0;
         anchorX = frameWidth / 2;
@@ -184,6 +194,42 @@ class Sprite {
         flipReposition = 0;
         tr = new AffineTransform();
         rotation(0);
+    }
+
+    private void createFrames() {
+    	imgSub = new BufferedImage[maxFrames];
+    	int frameX = 0;
+    	int frameY = 0;
+    	
+    	try {
+			imgB = ImageIO.read(new FileInputStream(new File(image) ));
+			
+			for (int i = 0; i < maxFrames; i++) {
+				//System.out.println(frameX + " + " + frameY);
+				//System.out.println();
+				imgSub[i] = imgB.getSubimage(frameX, frameY, frameWidth, frameHeight);
+				frameX += frameWidth;
+				
+				if (frameX == imageWidth) {
+					frameX = 0;
+					frameY += frameHeight;
+				}
+				
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
+
+    public static double calculateDistance(int startX, int startY, int endX, int endY) {
+    	double distance;
+    	
+    	distance = Math.pow(endX - startX, 2) + Math.pow(endY - startY, 2);
+    	distance = Math.sqrt(distance);
+    	
+    	return distance;
     }
     
     public static double calculateDirection(
@@ -212,11 +258,12 @@ class Sprite {
      * @throws InvalidFrameException
      */
     private void calculateFrames() {
-        if (imageWidth % frameWidth == 0) {
+    	if (imageWidth % frameWidth == 0 && imageHeight % frameHeight == 0) {
             maxFrames = imageWidth / frameWidth;
+            maxFrames = maxFrames * imageHeight / frameHeight;
         } else {
-            throw new InvalidFrameException("Image width divided with frame " +
-                                    "width must result in an Integer value.");
+            throw new InvalidFrameException("Image width/height divided with frame " +
+                                    "width/height must result in an Integer value.");
         }
     }
     
@@ -251,6 +298,8 @@ class Sprite {
     		flipReposition = 0;
     	}
     }
+
+    //private int counter;
     
     /**
      * Paints the Sprite.
@@ -263,8 +312,14 @@ class Sprite {
         tr.setTransform(flipValue, 0, 0, 1, flipReposition+posX, 0+posY);
         tr.rotate(rotation, frameWidth/2, frameHeight/2);
         
-        g2d.drawImage(image, tr, null);
+        g2d.drawImage(imgSub[frame], tr, null);
+        /*
+        if (counter > 15) {
+        	nextFrame();
+        	counter = 0;
+        }
         
+        counter++;
     	/*
     	// Destination coordinates 1 & 2 then source image coordinates 1 & 2.
         if (reversedImage == false) {
@@ -303,12 +358,54 @@ class Sprite {
         boolean collides = false;
         
         if (sprite != this) {
-            int spriteX = sprite.getX();
-            int spriteY = sprite.getY();
+        	/*
+        	BufferedImage spriteFrame = sprite.getImage();
+            int thisPixelAlpha;
+        	int spritePixelAlpha;
+        	int spriteFrameWidth = sprite.getFrameWidth();
+        	int spriteFrameHeight = sprite.getFrameHeight();
+        	
+        	for (int i = 0; i < frameHeight; i++) {
+        		for (int n = 0; n < frameWidth; n++) {
+        			thisPixelAlpha = imgSub[0].getAlphaRaster().getSample(n, i, 0);
+        			spritePixelAlpha = spriteFrame.getAlphaRaster().getSample(n, i, 0);
+        			
+        			if (thisPixelAlpha > 160 && spritePixelAlpha > 160) {
+        				collides = true;
+        			}
+        		}
+        	}
+        	
+        	
+        	int spriteX = sprite.getAnchorX();
+            int spriteY = sprite.getAnchorY();
             int spriteWidth = sprite.getWidth();
             int spriteHeight = sprite.getHeight();
+            int spriteFacing = sprite.getFacingDirection();
             double spriteScale = sprite.getScale();
+            double distance = calculateDistance(anchorX, anchorY, spriteX, spriteY);
             
+            boolean horizontalCollision = false;
+            boolean verticalCollision = false;
+
+            if (posX > spriteX && posX - frameWidth < spriteX) {
+            	// check right side of this and left of sprite
+            	
+            } else if (posX < spriteX && posX + frameWidth > spriteX) {
+            	// check opposite directions
+            }
+            
+            if (posY > spriteY && posY - frameHeight < spriteY) {
+            	// check top side of this and bottom of sprite
+            } else if (posY < spriteY && posY + frameHeight > spriteY) {
+            	// check opposite directions
+            }
+            
+            if (horizontalCollision && verticalCollision) {
+            	collides = true;
+            }
+            
+            /*
             if ( ( posX + frameWidth * scale >= spriteX && 
                    posX <= spriteX 
                    ||
@@ -322,6 +419,7 @@ class Sprite {
                    posY <= spriteY + spriteHeight * spriteScale ) ) {
                 collides = true;
             }
+            */
         }
         
         return collides;
@@ -439,6 +537,14 @@ class Sprite {
     public int getFrame() {
         return frame;
     }
+
+    public int getFrameWidth() {
+    	return frameWidth;
+    }
+    
+    public int getFrameHeight() {
+    	return frameHeight;
+    }
     
     /**
      * Returns frame count.
@@ -447,6 +553,10 @@ class Sprite {
      */
     public int getMaxFrames() {
         return maxFrames;
+    }
+
+    public BufferedImage getImage() {
+    	return imgSub[frame];
     }
     
     /**
