@@ -81,6 +81,7 @@ class GameCanvas extends JPanel {
     		
     		enemies.moveEnemies();
     		enemies.drawEnemies(g);
+    		enemies.moveGun();
     		enemies.shoot();
     		
     		gunManager.drawGuns(g);

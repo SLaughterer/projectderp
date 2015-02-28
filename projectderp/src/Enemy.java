@@ -49,9 +49,7 @@ public class Enemy extends Sprite {
 		this.damageModifier = damageModifier;
 	}
 	
-	@Override
-	public void move() {
-		super.move();
+	public void moveGun() {
 		gun.rotation(this.getFacingDirection());
 		gun.setX(this.getX());
 		gun.setY(this.getY());
