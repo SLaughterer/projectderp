@@ -1,7 +1,7 @@
 
 public class Hitbox {
 	public final static int TYPE_CIRCLE = 0;
-	public final static int TYPE_SQUARE = 1;
+	public final static int TYPE_RECTANGLE = 1;
 	private int type;
 	private double radius;
 	private int width;
@@ -36,7 +36,7 @@ public class Hitbox {
 				collides = true;
 			}
 		} else if (hitbox1.getType() == TYPE_CIRCLE && 
-				hitbox2.getType() == TYPE_SQUARE) {
+				hitbox2.getType() == TYPE_RECTANGLE) {
 			
 			// If sprite anchor is within sprite2 x and x + width.
 			if (sprite.getAnchorX()
@@ -66,7 +66,7 @@ public class Hitbox {
 					collides = true;
 				}
 			}
-		} else if (hitbox1.getType() == TYPE_SQUARE && 
+		} else if (hitbox1.getType() == TYPE_RECTANGLE && 
 				hitbox2.getType() == TYPE_CIRCLE) {
 			collides = Hitbox.collisionCheck(sprite2, sprite);
 		}
