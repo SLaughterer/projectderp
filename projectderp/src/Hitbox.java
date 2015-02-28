@@ -1,23 +1,73 @@
-
+/**
+ * Hitbox class for the Game. Used to detect collisions.
+ *
+ * @author Tero Pykälämäki
+ * @version 2015.0228
+ * @since 1.7
+ */
 public class Hitbox {
+	
+	/**
+	 * Determines hitbox type.
+	 */
 	public final static int TYPE_CIRCLE = 0;
+	
+	/**
+	 * Determines hitbox type.
+	 */
 	public final static int TYPE_RECTANGLE = 1;
+	
+	/**
+	 * Determines hitbox type.
+	 */
 	private int type;
+	
+	/**
+	 * Radius of the circle-shaped hitbox.
+	 */
 	private double radius;
+	
+	/**
+	 * Width of the rectangle hitbox.
+	 */
 	private int width;
+	
+	/**
+	 * Height of the rectangle hitbox.
+	 */
 	private int height;
 	
+	/**
+	 * Creates a hitbox object. Use for circle type.
+	 * 
+	 * @param type TYPE_CIRCLE expected.
+	 * @param radius Radius of the hitbox.
+	 */
 	public Hitbox(int type, double radius) {
 		this.type = type;
 		this.radius = radius;
 	}
 	
+	/**
+	 * Creates a hitbox object. Use for rectangle type.
+	 * 
+	 * @param type TYPE_RECTANGLE expected.
+	 * @param width Width of the hitbox.
+	 * @param height Height of the hitbox.
+	 */
 	public Hitbox(int type, int width, int height) {
 		this.type = type;
 		this.width = width;
 		this.height = height;
 	}
 	
+	/**
+	 * Determines if hitboxes of given Sprites are overlapping each other.
+	 * 
+	 * @param sprite First sprite with a set hitbox object.
+	 * @param sprite2 Second sprite with a set hitbox object.
+	 * @return True when overlapping.
+	 */
 	public static boolean collisionCheck(Sprite sprite, Sprite sprite2) {
 		boolean collides = false;
 		
@@ -165,6 +215,4 @@ public class Hitbox {
 	public void setHeight(int height) {
 		this.height = height;
 	}
-	
-	
 }
