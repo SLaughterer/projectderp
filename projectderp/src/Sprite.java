@@ -134,7 +134,8 @@ class Sprite {
 
     private BufferedImage imgB;
     private BufferedImage[] imgSub;
-    
+    private Hitbox hitbox;
+     
     /**
      * Creates a non-animated Sprite.
      *
@@ -194,6 +195,7 @@ class Sprite {
         flipReposition = 0;
         tr = new AffineTransform();
         rotation(0);
+        hitbox = new Hitbox(Hitbox.TYPE_CIRCLE, frameWidth / 2);
     }
 
     private void createFrames() {
@@ -557,6 +559,14 @@ class Sprite {
 
     public BufferedImage getImage() {
     	return imgSub[frame];
+    }
+    
+    public void setHitbox(Hitbox hitbox) {
+    	this.hitbox = hitbox;
+    }
+    
+    public Hitbox getHitbox() {
+    	return hitbox;
     }
     
     /**
