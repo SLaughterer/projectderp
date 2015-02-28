@@ -26,54 +26,114 @@ public class Hitbox {
 		
 		if (hitbox1.getType() == TYPE_CIRCLE && 
 				hitbox2.getType() == TYPE_CIRCLE) {
-			
-			// If within distance.
-			if (Sprite.calculateDistance(
-					sprite.getAnchorX(), sprite.getAnchorY(), 
-					sprite2.getAnchorX(), sprite2.getAnchorY()) 
-					< 
-					hitbox1.getRadius() + hitbox2.getRadius() ) {
-				collides = true;
-			}
+			collides = circleToCircle(sprite, sprite2);
 		} else if (hitbox1.getType() == TYPE_CIRCLE && 
 				hitbox2.getType() == TYPE_RECTANGLE) {
-			
-			// If sprite anchor is within sprite2 x and x + width.
-			if (sprite.getAnchorX()
-					>= sprite2.getAnchorX() - hitbox2.getWidth()/2 
-					&& sprite.getAnchorX() 
-					< sprite2.getAnchorX() + hitbox2.getWidth()/2) {
-				
-				// If within distance.
-				if (hitbox1.getRadius() + hitbox2.getHeight()/2 
-						> Sprite.calculateDistance(
-								sprite.getAnchorX(), sprite.getAnchorY(), 
-								sprite.getAnchorX(), sprite2.getAnchorY())) {
-					collides = true;
-				}
-				
-			// If sprite anchor is within sprite2 y and y + height.
-			} else if (sprite.getAnchorY()
-					>= sprite2.getAnchorY() - hitbox2.getHeight()/2
-					&& sprite.getAnchorY()
-					< sprite2.getAnchorY() + hitbox2.getHeight()/2) {
-				
-				// If within distance.
-				if (hitbox1.getRadius() + hitbox2.getWidth()/2
-						> Sprite.calculateDistance(
-								sprite.getAnchorX(), sprite.getAnchorY(),
-								sprite2.getAnchorX(), sprite.getAnchorY())) {
-					collides = true;
-				}
-			}
+			collides = circleToRectangle(sprite, sprite2);
 		} else if (hitbox1.getType() == TYPE_RECTANGLE && 
 				hitbox2.getType() == TYPE_CIRCLE) {
-			collides = Hitbox.collisionCheck(sprite2, sprite);
+			collides = circleToRectangle(sprite2, sprite);
+		} else if (hitbox1.getType() == TYPE_RECTANGLE &&
+				hitbox2.getType() == TYPE_RECTANGLE) {
+			collides = rectangleToRectangle(sprite, sprite2);
 		}
 		
 		return collides;
 	}
 
+	// Assisting functions.
+	private static boolean circleToCircle(Sprite sprite, Sprite sprite2) {
+		boolean collides = false;
+		
+		// If within distance.
+		if (Sprite.calculateDistance(
+				sprite.getAnchorX(), sprite.getAnchorY(), 
+				sprite2.getAnchorX(), sprite2.getAnchorY()) 
+				< 
+				sprite.getHitbox().getRadius() 
+				+ sprite2.getHitbox().getRadius() ) {
+			collides = true;
+		}
+		
+		return collides;
+	}
+	
+	private static boolean circleToRectangle(Sprite sprite, Sprite sprite2) {
+		boolean collides = false;
+		
+		Hitbox hitbox1 = sprite.getHitbox();
+		Hitbox hitbox2 = sprite2.getHitbox();
+		
+		// If sprite anchor is within sprite2 x and x + width.
+		if (sprite.getAnchorX()
+				>= sprite2.getAnchorX() - hitbox2.getWidth()/2 
+				&& sprite.getAnchorX() 
+				< sprite2.getAnchorX() + hitbox2.getWidth()/2) {
+			
+			// If within distance.
+			if (hitbox1.getRadius() + hitbox2.getHeight()/2 
+					> Sprite.calculateDistance(
+							sprite.getAnchorX(), sprite.getAnchorY(), 
+							sprite.getAnchorX(), sprite2.getAnchorY())) {
+				collides = true;
+			}
+			
+		// If sprite anchor is within sprite2 y and y + height.
+		} else if (sprite.getAnchorY()
+				>= sprite2.getAnchorY() - hitbox2.getHeight()/2
+				&& sprite.getAnchorY()
+				< sprite2.getAnchorY() + hitbox2.getHeight()/2) {
+			
+			// If within distance.
+			if (hitbox1.getRadius() + hitbox2.getWidth()/2
+					> Sprite.calculateDistance(
+							sprite.getAnchorX(), sprite.getAnchorY(),
+							sprite2.getAnchorX(), sprite.getAnchorY())) {
+				collides = true;
+			}
+		}
+		
+		return collides;
+	}
+	
+	private static boolean rectangleToRectangle(Sprite sprite, Sprite sprite2) {
+		boolean collides = false;
+		
+		Hitbox hitbox1 = sprite.getHitbox();
+		Hitbox hitbox2 = sprite2.getHitbox();
+		
+		// If sprite anchor is within sprite2 x and x + width.
+		if (sprite.getAnchorX()
+				>= sprite2.getAnchorX() - hitbox2.getWidth()/2 
+				&& sprite.getAnchorX() 
+				< sprite2.getAnchorX() + hitbox2.getWidth()/2) {
+			
+			// If within distance.
+			if (hitbox1.getHeight()/2 + hitbox2.getHeight()/2 
+					> Sprite.calculateDistance(
+							sprite.getAnchorX(), sprite.getAnchorY(), 
+							sprite.getAnchorX(), sprite2.getAnchorY())) {
+				collides = true;
+			}
+			
+		// If sprite anchor is within sprite2 y and y + height.
+		} else if (sprite.getAnchorY()
+				>= sprite2.getAnchorY() - hitbox2.getHeight()/2
+				&& sprite.getAnchorY()
+				< sprite2.getAnchorY() + hitbox2.getHeight()/2) {
+			
+			// If within distance.
+			if (hitbox1.getWidth()/2 + hitbox2.getWidth()/2
+					> Sprite.calculateDistance(
+							sprite.getAnchorX(), sprite.getAnchorY(),
+							sprite2.getAnchorX(), sprite.getAnchorY())) {
+				collides = true;
+			}
+		}
+		
+		return collides;
+	}
+	
 	public int getType() {
 		return type;
 	}
