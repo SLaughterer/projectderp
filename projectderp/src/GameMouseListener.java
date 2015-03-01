@@ -29,7 +29,15 @@ class GameMouseListener extends MouseAdapter {
      */
     @Override
     public void mouseClicked(MouseEvent e) {
-        
+    	player.shoot();
+    }
+    
+    public void mousePressed(MouseEvent e) {
+        player.setShooting(true);
+    }
+    
+    public void mouseReleased(MouseEvent e) {
+    	player.setShooting(false);
     }
     
     /**

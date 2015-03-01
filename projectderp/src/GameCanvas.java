@@ -45,7 +45,7 @@ class GameCanvas extends JPanel {
     public void userInterface() {
     	
     	// minigun is placeholder
-    	currentGun = new Sprite("res/Minigun.png", 64, 64);
+    	currentGun = new Sprite("res/Weapons/Minigun.png", 64, 64);
     	currentGun.rotation(90);
     }    
 
@@ -68,6 +68,11 @@ class GameCanvas extends JPanel {
     				player.getAnchorX(), player.getAnchorY(), 
     				mousePosition()));
     		player.draw(g);
+    		player.moveGun();
+    		
+    		if (player.isShooting()) {
+    			player.shoot();
+    		}
 
     		/*
     		for (int i = 0; i < 64; i++) {

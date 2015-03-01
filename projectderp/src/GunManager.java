@@ -28,6 +28,10 @@ public class GunManager {
         try (BufferedReader inputStream = new BufferedReader(new FileReader(fileName))) {
             String line;
             
+            inputStream.readLine();
+            inputStream.readLine();
+            //Skips the first 2 lines.
+            
             while ((line = inputStream.readLine()) != null) {
                 text += line;
                 text += ";";

@@ -24,6 +24,8 @@ public class Player extends Sprite {
 	
 	public int health = 100;
 	public int score = 100;
+	private Gun gun;
+	private boolean isShooting;
 	
 	/**
      * Creates a non-animated Player sprite.
@@ -62,6 +64,7 @@ public class Player extends Sprite {
      */
     private void initializePlayer() {
         super.setMovementSpeed(Player.DEFAULT_SPEED);
+        gun = GunManager.requestGun(GunManager.armory.get(1));
     }
     
     /**
@@ -138,6 +141,26 @@ public class Player extends Sprite {
     	return score;
     }
     
+	public boolean isShooting() {
+		return isShooting;
+	}
+
+	public void setShooting(boolean isShooting) {
+		this.isShooting = isShooting;
+	}
+
+	public void moveGun() {
+		if (gun != null) {
+			gun.rotation(this.getFacingDirection());
+			gun.setX(this.getX());
+			gun.setY(this.getY());
+		}
+	}
+	
+	public void shoot() {
+		gun.shoot();
+	}
+	
     public void changeHealthBy(int damage) {
     	
     	health += damage;
