@@ -15,7 +15,7 @@ public class EnemyManager {
 	public void createEnemy() {
 		Enemy newEnemy = new Enemy("res/Soldier.png", 64, 64, 64, 64);
 		newEnemy.setHitbox(new Hitbox(Hitbox.TYPE_CIRCLE, 16));
-		newEnemy.setMovementSpeed(2);
+		newEnemy.setMovementSpeed(3);
 		enemies.add(newEnemy);
 	}
 	
@@ -56,5 +56,17 @@ public class EnemyManager {
 		for (int i = 0; i < enemies.size(); i++) {
 			enemies.get(i).moveGun();
 		}
+	}
+	
+	public int size() {
+		return enemies.size();
+	}
+	
+	public ArrayList<Enemy> getEnemies() {
+		return enemies;
+	}
+	
+	public Enemy getEnemy(int index) {
+		return enemies.get(index);
 	}
 }

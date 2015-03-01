@@ -46,6 +46,11 @@ public class Hitbox {
 	public Hitbox(int type, double radius) {
 		this.type = type;
 		this.radius = radius;
+		
+		// Adding values to these allow for alignment methods to
+		// work with circle type.
+		width = (int) this.radius * 2;
+		height = width;
 	}
 	
 	/**
@@ -115,10 +120,7 @@ public class Hitbox {
 		Hitbox hitbox2 = sprite2.getHitbox();
 		
 		// If sprite anchor is within sprite2 x and x + width.
-		if (sprite.getAnchorX()
-				>= sprite2.getAnchorX() - hitbox2.getWidth()/2 
-				&& sprite.getAnchorX() 
-				< sprite2.getAnchorX() + hitbox2.getWidth()/2) {
+		if (verticallyAligned(sprite, sprite2)) {
 			
 			// If within distance.
 			if (hitbox1.getRadius() + hitbox2.getHeight()/2 
@@ -129,10 +131,7 @@ public class Hitbox {
 			}
 			
 		// If sprite anchor is within sprite2 y and y + height.
-		} else if (sprite.getAnchorY()
-				>= sprite2.getAnchorY() - hitbox2.getHeight()/2
-				&& sprite.getAnchorY()
-				< sprite2.getAnchorY() + hitbox2.getHeight()/2) {
+		} else if (horizontallyAligned(sprite, sprite2)) {
 			
 			// If within distance.
 			if (hitbox1.getRadius() + hitbox2.getWidth()/2
@@ -153,10 +152,7 @@ public class Hitbox {
 		Hitbox hitbox2 = sprite2.getHitbox();
 		
 		// If sprite anchor is within sprite2 x and x + width.
-		if (sprite.getAnchorX()
-				>= sprite2.getAnchorX() - hitbox2.getWidth()/2 
-				&& sprite.getAnchorX() 
-				< sprite2.getAnchorX() + hitbox2.getWidth()/2) {
+		if (verticallyAligned(sprite, sprite2)) {
 			
 			// If within distance.
 			if (hitbox1.getHeight()/2 + hitbox2.getHeight()/2 
@@ -167,10 +163,7 @@ public class Hitbox {
 			}
 			
 		// If sprite anchor is within sprite2 y and y + height.
-		} else if (sprite.getAnchorY()
-				>= sprite2.getAnchorY() - hitbox2.getHeight()/2
-				&& sprite.getAnchorY()
-				< sprite2.getAnchorY() + hitbox2.getHeight()/2) {
+		} else if (horizontallyAligned(sprite, sprite2)) {
 			
 			// If within distance.
 			if (hitbox1.getWidth()/2 + hitbox2.getWidth()/2
@@ -182,6 +175,39 @@ public class Hitbox {
 		}
 		
 		return collides;
+	}
+	
+	public static boolean verticallyAligned(Sprite sprite, Sprite sprite2) {
+		boolean aligned = false;
+		
+		System.out.println("sprite x: " + sprite.getAnchorX());
+		System.out.println("sprite y: " + sprite.getAnchorY());
+		System.out.println("sprite2 x: " + sprite2.getAnchorX());
+		System.out.println("sprite2 y: " + sprite2.getAnchorY());
+		
+		if (sprite.getAnchorX()
+				>= sprite2.getAnchorX() - sprite2.getHitbox().getWidth()/2 
+				&& sprite.getAnchorX() 
+				< sprite2.getAnchorX() + sprite2.getHitbox().getWidth()/2) {
+			aligned = true;
+			System.out.println("vertically " + aligned);
+		}
+		
+		return aligned;
+	}
+	
+	public static boolean horizontallyAligned(Sprite sprite, Sprite sprite2) {
+		boolean aligned = false;
+		
+		if (sprite.getAnchorY()
+				>= sprite2.getAnchorY() - sprite2.getHitbox().getHeight()/2
+				&& sprite.getAnchorY()
+				< sprite2.getAnchorY() + sprite2.getHitbox().getHeight()/2) {
+			aligned = true;
+			System.out.println("horizontally " + aligned);
+		}
+		
+		return aligned;
 	}
 	
 	public int getType() {

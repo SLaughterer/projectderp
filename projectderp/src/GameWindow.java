@@ -117,6 +117,35 @@ class GameWindow extends JFrame {
 
     public void checkCollisions() {
     	// collisions
+    	Enemy enemy;
+    	
+    	for (int i = 0; i < enemies.size(); i++) {
+    		enemy = enemies.getEnemy(i);
+    		
+    		if (Hitbox.collisionCheck(player, enemy)) {
+    			if (Hitbox.verticallyAligned(player, enemy)) {
+    				if ( ( player.getMovementY() < 0 
+    						&& enemy.getAnchorY() < player.getAnchorY() )
+    						||
+    						( player.getMovementY() > 0
+    						&& enemy.getAnchorY() > player.getAnchorY() )
+    					) {
+    					player.stopVerticalMovement();
+    				}
+    			}
+    			
+    			if (Hitbox.horizontallyAligned(player, enemy)) {
+    				if ( ( player.getMovementX() < 0 
+    						&& enemy.getAnchorX() < player.getAnchorX() )
+    						||
+    						( player.getMovementX() > 0
+    						&& enemy.getAnchorX() > player.getAnchorX() )
+    					) {
+    					player.stopHorizontalMovement();
+    				}
+    			}
+    		}
+    	}
     }
     
     public int getWindowWidth() {
