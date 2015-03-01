@@ -1,2 +1,2 @@
-AK74,res/Minigun.png,64,64,64,64,10,10,10,10,600,30,3,res/bullet.png
+AK74,res/Weapons/Minigun.png,64,64,64,64,10,10,10,10,600,30,3,res/bullet.png
 Uzi,res/derpvivor.png,64,64,64,64,10,10,10,10,900,50,2,res/bullet.png
