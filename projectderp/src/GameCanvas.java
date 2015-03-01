@@ -24,6 +24,7 @@ class GameCanvas extends JPanel {
 	GunManager gunManager = new GunManager();
 	BulletManager bulletManager = new BulletManager();
 	private Dimension dimension;
+	Tiles tiles = new Tiles(Toolkit.getDefaultToolkit().createImage("res/levels/floor_1.png"), 64, 64, 64, 64, 4, 4);
 		
 	public GameCanvas() {
 		
@@ -35,6 +36,8 @@ class GameCanvas extends JPanel {
 		
 		enemies = new EnemyManager(player);
 		enemies.createEnemy();
+		
+		tiles.loadLevel(0);
 		
 		userInterface();
 	}
@@ -59,6 +62,8 @@ class GameCanvas extends JPanel {
     		
         	// getting the width and height of the window
         	dimension = this.getSize();
+        	
+        	tiles.draw(g);
         	
     		player.move();
     		player.rotation(Sprite.calculateDirection(
