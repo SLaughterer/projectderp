@@ -57,4 +57,16 @@ public class EnemyManager {
 			enemies.get(i).moveGun();
 		}
 	}
+	
+	public int size() {
+		return enemies.size();
+	}
+	
+	public ArrayList<Enemy> getEnemies() {
+		return enemies;
+	}
+	
+	public Enemy getEnemy(int index) {
+		return enemies.get(index);
+	}
 }
