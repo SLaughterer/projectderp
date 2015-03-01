@@ -15,7 +15,7 @@ public class EnemyManager {
 	public void createEnemy() {
 		Enemy newEnemy = new Enemy("res/Soldier.png", 64, 64, 64, 64);
 		newEnemy.setHitbox(new Hitbox(Hitbox.TYPE_CIRCLE, 16));
-		newEnemy.setMovementSpeed(2);
+		newEnemy.setMovementSpeed(3);
 		enemies.add(newEnemy);
 	}
 	
