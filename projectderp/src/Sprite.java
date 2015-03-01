@@ -232,8 +232,7 @@ class Sprite {
 			}
 			
 			for (int i = 0; i < maxFrames; i++) {
-				//System.out.println(frameX + " + " + frameY);
-				//System.out.println();
+				
 				imgSub[i] = imgB.getSubimage(frameX, frameY, frameWidth, frameHeight);
 				frameX += frameWidth;
 				
@@ -262,8 +261,7 @@ class Sprite {
     public static double calculateDirection(
     		int startX, int startY, int endX, int endY) {
     	double direction = -1; 
-    	//System.out.println(startX + " + " + endX);
-    	//System.out.println(startY + " + " + endY);
+    	
     	direction = (Math.atan2(endY - startY, endX - startX) * 180.0 / Math.PI);
     	
     	return direction + 90;
@@ -326,8 +324,6 @@ class Sprite {
     	}
     }
 
-    //private int counter;
-    
     /**
      * Paints the Sprite.
      *
@@ -340,14 +336,6 @@ class Sprite {
         tr.rotate(rotation, frameWidth/2, frameHeight/2);
         
         g2d.drawImage(imgSub[frame], tr, null);
-        /*
-        if (counter > 15) {
-        	nextFrame();
-        	counter = 0;
-        }
-        
-        counter++;
-    	*/
     }
     
     /**
@@ -385,34 +373,6 @@ class Sprite {
     private void calculateMovement() {
     	movementY = (int)(movementSpeed * Math.sin(Math.toRadians(movementDirection - 90)));
     	movementX = (int)(movementSpeed * Math.cos(Math.toRadians(movementDirection - 90)));
-    	
-    	/*
-    	if (movementDirection > 22 && movementDirection <= 67) {
-    		movementX = movementSpeed;
-    		movementY = -movementSpeed;
-    	} else if (movementDirection > 67 && movementDirection <= 112) {
-    		movementX = movementSpeed;
-    		movementY = 0;
-    	} else if (movementDirection > 112 && movementDirection <= 157) {
-    		movementX = movementSpeed;
-    		movementY = movementSpeed;
-    	} else if (movementDirection > 157 && movementDirection <= 202) {
-    		movementX = 0;
-    		movementY = movementSpeed;
-    	} else if (movementDirection > 202 && movementDirection <= 247) {
-    		movementX = -movementSpeed;
-    		movementY = movementSpeed;
-    	} else if (movementDirection > 247 && movementDirection <= 292) {
-    		movementX = -movementSpeed;
-    		movementY = 0;
-    	} else if (movementDirection > 292 && movementDirection <= 337) {
-    		movementX = -movementSpeed;
-    		movementY = -movementSpeed;
-    	} else {
-    		movementX = 0;
-    		movementY = -movementSpeed;
-    	}
-    	*/
     }
     
     /**
@@ -580,10 +540,8 @@ class Sprite {
 	}
 
 	public void setMovementDirection(int degrees) {
-		if (degrees >= 0) {
-			this.movementDirection = (int) checkDegrees(degrees);
-			calculateMovement();
-		}
+		this.movementDirection = (int) checkDegrees(degrees);
+		calculateMovement();
 	}
 
 	public int getFacingDirection() {
@@ -599,7 +557,7 @@ class Sprite {
 			degrees = degrees + 360;
 		}
 		
-		while(degrees >= 360) {
+		while(degrees > 360) {
 			degrees = degrees - 360;
 		}
 		
