@@ -7,6 +7,8 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.BorderLayout;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 class MenuWindow extends JFrame {
     
@@ -89,8 +91,19 @@ class MenuWindow extends JFrame {
         		
         		System.out.println("testing");
         				
-        		GameWindow gameWindow = new GameWindow(menuWindow);
-        		GameLoop gameLoop = new GameLoop(gameWindow);	
+        		GameWindow gameWindow;
+        		GameLoop gameLoop;
+				
+        		try {
+					gameWindow = new GameWindow(menuWindow);
+					gameLoop = new GameLoop(gameWindow);
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 	
         		
         		setVisible(false);
         	}  	

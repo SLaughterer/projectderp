@@ -180,17 +180,12 @@ public class Hitbox {
 	public static boolean verticallyAligned(Sprite sprite, Sprite sprite2) {
 		boolean aligned = false;
 		
-		System.out.println("sprite x: " + sprite.getAnchorX());
-		System.out.println("sprite y: " + sprite.getAnchorY());
-		System.out.println("sprite2 x: " + sprite2.getAnchorX());
-		System.out.println("sprite2 y: " + sprite2.getAnchorY());
-		
 		if (sprite.getAnchorX()
 				>= sprite2.getAnchorX() - sprite2.getHitbox().getWidth()/2 
 				&& sprite.getAnchorX() 
 				< sprite2.getAnchorX() + sprite2.getHitbox().getWidth()/2) {
 			aligned = true;
-			System.out.println("vertically " + aligned);
+			// System.out.println("vertically " + aligned);
 		}
 		
 		return aligned;
@@ -204,7 +199,7 @@ public class Hitbox {
 				&& sprite.getAnchorY()
 				< sprite2.getAnchorY() + sprite2.getHitbox().getHeight()/2) {
 			aligned = true;
-			System.out.println("horizontally " + aligned);
+			// System.out.println("horizontally " + aligned);
 		}
 		
 		return aligned;

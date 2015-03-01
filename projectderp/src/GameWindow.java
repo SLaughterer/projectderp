@@ -5,6 +5,7 @@
  * @version 2014.1202
  * @since 1.7
  */
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -12,6 +13,11 @@ import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 class GameWindow extends JFrame {
     
@@ -61,14 +67,19 @@ class GameWindow extends JFrame {
     
     /**
      * Constructs the window used in the game engine.
+     * @throws IOException 
+     * @throws FileNotFoundException 
      */
-    public GameWindow(final MenuWindow menu) {
+    public GameWindow(final MenuWindow menu) throws FileNotFoundException, IOException {
     	
     	this.menu = menu;
         windowWidth = 600;
         windowHeight = 500;
+        BufferedImage img;
         
-        player = new Player("res/2H Stance.png", 64, 64, 64, 64);
+		img = ImageIO.read(new FileInputStream(new File("res/2H Stance.png") ));
+		
+        player = new Player(img, 64, 64, 64, 64);
         player.setHitbox(new Hitbox(Hitbox.TYPE_CIRCLE, 16));
         
         canvas = new GameCanvas(player);

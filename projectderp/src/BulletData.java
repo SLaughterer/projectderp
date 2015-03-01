@@ -1,4 +1,5 @@
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 
 /**
  * Bullet class to store bullet image.
@@ -8,21 +9,21 @@ import java.awt.Image;
  * @since 1.7
  */
 public class BulletData {
-	private String img;
+	private BufferedImage img;
 	private int frameWidth = 64;
 	private int frameHeight = 64;
 	private int imageWidth = 64;
 	private int imageHeight = 64;
 	
-	public BulletData(String img) {
+	public BulletData(BufferedImage img) {
 		this.img = img;
 	}
 	
-	public String getImg() {
+	public BufferedImage getImg() {
 		return img;
 	}
 	
-	public void setImg(String img) {
+	public void setImg(BufferedImage img) {
 		this.img = img;
 	}
 	
