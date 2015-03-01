@@ -27,4 +27,21 @@ public class BulletManager {
 			//System.out.println("drawing");
 		}
 	}
+	
+	public void collisions(Player player, EnemyManager enemies) {
+		for (int i = 0; i < bullets.size(); i++) {
+			if (bullets.get(i).getShooter() == Bullet.PLAYER) {
+				for (int n = 0; n < enemies.size(); n++) {
+					if (Hitbox.collisionCheck(bullets.get(i), enemies.getEnemy(n))) {
+						enemies.getEnemy(n).AlterHealth(-5);
+						player.addScore(1);
+					}
+				}
+			} else if (bullets.get(i).getShooter() == Bullet.ENEMY) {
+				if (Hitbox.collisionCheck(bullets.get(i), player)) {
+					player.alterHealth(-2);
+				}
+			}
+		}
+	}
 }

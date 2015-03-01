@@ -37,21 +37,23 @@ public class Gun extends Sprite {
 		random = new Random();
 	}
 	
-	public void shoot() {
+	public void shoot(int shooter) {
 		 if (bulletsInClip == 0) {
 			initializeReload();
 		} else if (cooldown == 0) {
-			BulletManager.addBullet(newBullet());
+			BulletManager.addBullet(newBullet(shooter));
 			initializeCooldown();
 			bulletsInClip--;
 		}
 	}
 	
-	private Bullet newBullet() {
+	private Bullet newBullet(int shooter) {
 		//laske damage
 		int direction = (int) (getFacingDirection() + 
 				        (random.nextInt(91) - 45) * (100.0 - accuracy) / 100.0);
 		Bullet bullet = new Bullet(damage, direction, range, bulletData, getX(), getY());
+		bullet.setShooter(shooter);
+		bullet.setHitbox(new Hitbox(Hitbox.TYPE_CIRCLE, 2));
 		return bullet;
 	}
 	

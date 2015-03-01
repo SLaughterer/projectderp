@@ -32,9 +32,6 @@ class GameCanvas extends JPanel {
 	public GameCanvas(Player host) {
 		
 		player = host;
-			
-		player.setX(50);
-		player.setY(50);
 		
 		enemies = new EnemyManager(player);
 		enemies.createEnemy();
@@ -73,16 +70,6 @@ class GameCanvas extends JPanel {
     		if (player.isShooting()) {
     			player.shoot();
     		}
-
-    		/*
-    		for (int i = 0; i < 64; i++) {
-        		for (int n = 0; n < 64; n++) {
-        			System.out.print(player.getImage().getAlphaRaster().getSample(n, i, 0));
-        			
-        		}
-        		System.out.println();
-        	}
-        	*/
     		
     		enemies.moveEnemies();
     		enemies.drawEnemies(g);
@@ -93,9 +80,12 @@ class GameCanvas extends JPanel {
     		
     		bulletManager.moveBullets();
     		bulletManager.drawBullets(g);
+    		bulletManager.collisions(player, enemies);
     		
     		// healthbar
     		g.drawString("HEALTH", 15, 15);
+    		g.setColor(Color.BLACK);
+    		g.fillRect(15, 20, 100, 20);
     		g.setColor(Color.RED);
     		g.fillRect(15, 20, player.getHealth(), 20);
     		
@@ -117,7 +107,7 @@ class GameCanvas extends JPanel {
     	currentGun.setY(-25);
     	
     	// testing
-    	player.addScore(1);
+    	//player.addScore(1);
     }
     
     private Point mousePosition() {
