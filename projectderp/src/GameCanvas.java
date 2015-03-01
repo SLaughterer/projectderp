@@ -24,6 +24,7 @@ class GameCanvas extends JPanel {
 	GunManager gunManager = new GunManager();
 	BulletManager bulletManager = new BulletManager();
 	private Dimension dimension;
+	LevelManager lm = new LevelManager();
 		
 	public GameCanvas() {
 		
