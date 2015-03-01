@@ -73,14 +73,16 @@ class GameWindow extends JFrame {
     public GameWindow(final MenuWindow menu) throws FileNotFoundException, IOException {
     	
     	this.menu = menu;
-        windowWidth = 600;
-        windowHeight = 500;
+        windowWidth = 800;
+        windowHeight = 600;
         BufferedImage img;
         
 		img = ImageIO.read(new FileInputStream(new File("res/2H Stance.png") ));
 		
         player = new Player(img, 64, 64, 64, 64);
         player.setHitbox(new Hitbox(Hitbox.TYPE_CIRCLE, 16));
+        player.setX(windowWidth/2 - 32);
+        player.setY(windowHeight/2 - 32);
         
         canvas = new GameCanvas(player);
         // acquire memory location of EnemyManager.
@@ -128,6 +130,10 @@ class GameWindow extends JFrame {
 
     public void checkCollisions() {
     	// collisions
+    	checkPlayerMovement();
+    }
+    
+    private void checkPlayerMovement() {
     	Enemy enemy;
     	
     	for (int i = 0; i < enemies.size(); i++) {

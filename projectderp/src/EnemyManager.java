@@ -34,6 +34,8 @@ public class EnemyManager {
 					player.getAnchorX(), player.getAnchorY());
 			if (!enemies.get(i).collidesWith(player) && distance < 200) {
 				enemies.get(i).move();
+			} else if (enemies.get(i).collidesWith(player)) {
+				player.alterHealth(-1);
 			}
 		}
 	}

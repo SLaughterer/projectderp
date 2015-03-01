@@ -24,8 +24,8 @@ public class Player extends Sprite {
 	public final static int DOWN = 2;
 	public final static int LEFT = 3;
 	
-	public int health = 100;
-	public int score = 100;
+	private int health;
+	private int score;
 	private Gun gun;
 	private boolean isShooting;
 	
@@ -86,6 +86,7 @@ public class Player extends Sprite {
     private void initializePlayer() {
         super.setMovementSpeed(Player.DEFAULT_SPEED);
         gun = GunManager.requestGun(GunManager.armory.get(1));
+        health = 100;
     }
     
     /**
@@ -152,9 +153,9 @@ public class Player extends Sprite {
     	return health;
     }
     
-    public void addScore(int adding) {
+    public void addScore(int value) {
     	
-    	score += adding;
+    	score += value;
     }
     
     public int getScore() {
@@ -179,15 +180,21 @@ public class Player extends Sprite {
 	}
 	
 	public void shoot() {
-		gun.shoot();
+		gun.shoot(Bullet.PLAYER);
 	}
 	
-    public void changeHealthBy(int damage) {
+    public void alterHealth(int damage) {
     	
     	health += damage;
     	
     	if (health < 0) {
     		health = 0;
+    		reset();
     	}
+    }
+    
+    public void reset() {
+    	health = 100;
+    	score = 0;
     }
 }

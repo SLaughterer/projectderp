@@ -48,6 +48,7 @@ class MenuWindow extends JFrame {
     public MenuWindow() {
         windowWidth = 600;
         windowHeight = 500;
+        
         canvas = new GameCanvas();
         mouseListener = new GameMouseListener();
         keyListener = new GameKeyListener(this);

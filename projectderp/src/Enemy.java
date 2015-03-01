@@ -41,6 +41,10 @@ public class Enemy extends Sprite {
 		this.health = health;
 	}
 
+	public void AlterHealth(int value) {
+		health += value;
+	}
+	
 	public int getDamageModifier() {
 		return damageModifier;
 	}
@@ -57,7 +61,7 @@ public class Enemy extends Sprite {
 	}
 	
 	public void shoot() {
-		gun.shoot();
+		gun.shoot(Bullet.ENEMY);
 	}
 	
 }
