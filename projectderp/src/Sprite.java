@@ -146,7 +146,8 @@ class Sprite {
     public Sprite(String img, int imageWidth, int imageHeight) {
     	frameWidth = imageWidth;
         frameHeight = imageHeight;
-    	initialize(img, imageWidth, imageHeight);        
+        image = img;
+    	initialize(imageWidth, imageHeight);        
         maxFrames = 1;
         createFrames();
     }
@@ -167,8 +168,31 @@ class Sprite {
                             int imageWidth, int imageHeight) {
     	this.frameWidth = frameWidth;
         this.frameHeight = frameHeight;
-    	initialize(img, imageWidth, imageHeight);
+        image = img;
+    	initialize(imageWidth, imageHeight);
         calculateFrames();
+        createFrames();
+    }
+    
+    /**
+     * Creates a (possibly animated) Sprite.
+     *
+     * Multiplying frame width with frame count should result in image width.
+     * Note: Currently frame height should be the same as image height.
+     *
+     * @param img Image depicting whatever the Sprite is intended to be.
+     * @param frameWidth The width of a single frame in parameter img.
+     * @param frameHeight The height of a single frame in parameter img.
+     * @param imageWidth The width of parameter img.
+     * @param imageHeight The height of parameter img.
+     */
+    public Sprite(BufferedImage img, int frameWidth, int frameHeight, 
+                            int imageWidth, int imageHeight) {
+    	this.frameWidth = frameWidth;
+        this.frameHeight = frameHeight;
+    	initialize(imageWidth, imageHeight);
+        calculateFrames();
+        imgB = img;
         createFrames();
     }
     
@@ -179,14 +203,13 @@ class Sprite {
      * @param imageWidth The width of parameter img.
      * @param imageHeight The height of parameter img.
      */
-    private void initialize(String img, int imageWidth, int imageHeight) {
+    private void initialize(int imageWidth, int imageHeight) {
         posX = 0;
         posY = 0;
         anchorX = frameWidth / 2;
         anchorY = frameHeight / 2;
         this.imageWidth = imageWidth;
         this.imageHeight = imageHeight;
-        image = img;
         frame = 0;
         reversedImage = false;
         scale = 1.0;
@@ -204,7 +227,9 @@ class Sprite {
     	int frameY = 0;
     	
     	try {
-			imgB = ImageIO.read(new FileInputStream(new File(image) ));
+			if (imgB == null) {
+				imgB = ImageIO.read(new FileInputStream(new File(image) ));
+			}
 			
 			for (int i = 0; i < maxFrames; i++) {
 				//System.out.println(frameX + " + " + frameY);

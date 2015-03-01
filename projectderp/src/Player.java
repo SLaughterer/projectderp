@@ -1,3 +1,5 @@
+import java.awt.image.BufferedImage;
+
 /**
  * Player class for the Game.
  *
@@ -53,6 +55,25 @@ public class Player extends Sprite {
      * @param imageHeight The height of parameter img.
      */
     public Player(String img, int frameWidth, int frameHeight, 
+                            int imageWidth, int imageHeight) {
+        super(img, frameWidth, frameHeight, imageWidth, imageHeight);
+        
+        initializePlayer();
+    }
+    
+    /**
+     * Creates a (possibly animated) Player sprite.
+     *
+     * Multiplying frame width with frame count should result in image width.
+     * Note: Currently frame height should be the same as image height.
+     *
+     * @param img Image depicting whatever the Sprite is intended to be.
+     * @param frameWidth The width of a single frame in parameter img.
+     * @param frameHeight The height of a single frame in parameter img.
+     * @param imageWidth The width of parameter img.
+     * @param imageHeight The height of parameter img.
+     */
+    public Player(BufferedImage img, int frameWidth, int frameHeight, 
                             int imageWidth, int imageHeight) {
         super(img, frameWidth, frameHeight, imageWidth, imageHeight);
         

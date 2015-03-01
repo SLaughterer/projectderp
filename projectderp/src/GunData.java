@@ -1,5 +1,12 @@
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 /**
  * Gun class to store stock gun properties.
@@ -10,7 +17,7 @@ import java.awt.Toolkit;
  */
 public class GunData {
 	private String name;
-	private String img;
+	private BufferedImage img;
 	private int frameWidth;
 	private int frameHeight;
 	private int imageWidth;
@@ -24,9 +31,9 @@ public class GunData {
 	private int reloadTime;
 	private BulletData bulletData;
 	
-	public GunData (String[] data) {
+	public GunData (String[] data) throws FileNotFoundException, IOException {
 		this.name = data[0];
-		this.img = data[1];
+		this.img = ImageIO.read(new FileInputStream(new File(data[1])));
 		this.frameWidth = Integer.parseInt(data[2]);
 		this.frameHeight = Integer.parseInt(data[3]);
 		this.imageWidth = Integer.parseInt(data[4]);
@@ -38,7 +45,8 @@ public class GunData {
 		this.roundsPerMinute = Integer.parseInt(data[10]);
 		this.clipSize = Integer.parseInt(data[11]);
 		this.reloadTime = Integer.parseInt(data[12]);
-		this.bulletData = new BulletData(data[13]);
+		this.bulletData = new BulletData(
+				ImageIO.read(new FileInputStream(new File(data[13]))));
 	}
 
 	public String getName() {
@@ -49,11 +57,11 @@ public class GunData {
 		this.name = name;
 	}
 
-	public String getImg() {
+	public BufferedImage getImg() {
 		return img;
 	}
 
-	public void setImg(String img) {
+	public void setImg(BufferedImage img) {
 		this.img = img;
 	}
 
