@@ -54,6 +54,7 @@ class Tiles {
      * The height of the image file.
      */
     private int imageHeight;
+    LevelManager levels = new LevelManager();
     
     /**
      * Constructs the tile layer and initializes it.
@@ -165,6 +166,18 @@ class Tiles {
         }
         
         return collides;
+    }
+    
+    public void printTiles() {
+    	for (int i = 0; i < tileRows; i++) {
+    		for (int j = 0; j < tileColumns; j++) {
+    			System.out.println(tile[j][i]);
+    		}
+    	}
+    }
+    
+    public void loadLevel(int index) {
+    	tile = levels.getLevel(index).readLevel();
     }
     
     /**

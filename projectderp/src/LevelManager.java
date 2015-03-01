@@ -7,7 +7,6 @@ import java.util.LinkedList;
 
 public class LevelManager {
 	private static LinkedList<Level> levels = new LinkedList<Level>();
-	Tiles tiles;
 	
 	public LevelManager() {
 		initialize();
@@ -36,7 +35,7 @@ public class LevelManager {
 		String rawData = null;
 		
 		//try {
-			rawData = open("res/Level01.txt");
+			rawData = open("res/Levels/Level01.txt");
 		/*} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -45,18 +44,18 @@ public class LevelManager {
 			e.printStackTrace();
 		}*/
 		String[] rows = rawData.split(";");
-		String[] columns = null;
+		String[][] cells = new String[rows.length][];
 		Level level;
 		
 		for (int i = 0; i < rows.length; i++) {
-			columns = rows[i].split(",");
+			cells[i] = rows[i].split(",");
 		}
 		
-		int[][] levelData = new int[columns.length][rows.length];
+		int[][] levelData = new int[cells.length][rows.length];
 		
 		for (int i = 0; i < rows.length; i++) {
-			for (int j = 0; j < columns.length; j++) {
-				levelData[j][i] = Integer.parseInt(columns[j]);
+			for (int j = 0; j < cells.length; j++) {
+				levelData[j][i] = Integer.parseInt(cells[j][i]);
 			}
 		}
 		
