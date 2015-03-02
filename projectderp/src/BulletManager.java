@@ -33,14 +33,22 @@ public class BulletManager {
 			if (bullets.get(i).getShooter() == Bullet.PLAYER) {
 				for (int n = 0; n < enemies.size(); n++) {
 					if (Hitbox.collisionCheck(bullets.get(i), enemies.getEnemy(n))) {
-						enemies.getEnemy(n).AlterHealth(-5);
+						enemies.getEnemy(n).AlterHealth(-bullets.get(i).getDamage());
 						player.addScore(1);
 					}
 				}
 			} else if (bullets.get(i).getShooter() == Bullet.ENEMY) {
 				if (Hitbox.collisionCheck(bullets.get(i), player)) {
-					player.alterHealth(-2);
+					player.alterHealth(-bullets.get(i).getDamage());
 				}
+			}
+		}
+	}
+	
+	public void deleteBullets() {
+		for (int i = 0; i < bullets.size(); i++) {
+			if (bullets.get(i).isDead()) {
+				bullets.remove(i);
 			}
 		}
 	}

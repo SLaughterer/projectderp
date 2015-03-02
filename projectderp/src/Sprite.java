@@ -135,6 +135,7 @@ class Sprite {
     private BufferedImage imgB;
     private BufferedImage[] imgSub;
     private Hitbox hitbox;
+    private boolean isDead;
      
     /**
      * Creates a non-animated Sprite.
@@ -637,4 +638,12 @@ class Sprite {
     public int getHeight() {
         return frameHeight;
     }
+
+	public boolean isDead() {
+		return isDead;
+	}
+
+	public void setDead(boolean isDead) {
+		this.isDead = isDead;
+	}
 }

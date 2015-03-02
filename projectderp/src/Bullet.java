@@ -33,11 +33,21 @@ public class Bullet extends Sprite {
 		return shooter;
 	}
 	
+	public int getDamage() {
+		return damage;
+	}
+
+	public void setDamage(int damage) {
+		this.damage = damage;
+	}
+
 	@Override
 	public void move() {
 		if (range > 0) {
 			super.move();
-			range =- getMovementSpeed();
+			range--;
+		} else {
+			setDead(true);
 		}
 	}
 }
