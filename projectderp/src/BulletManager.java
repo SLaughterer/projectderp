@@ -49,6 +49,7 @@ public class BulletManager {
 		for (int i = 0; i < bullets.size(); i++) {
 			if (bullets.get(i).isDead()) {
 				bullets.remove(i);
+				i--;
 			}
 		}
 	}

@@ -14,18 +14,21 @@ import java.awt.Graphics;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.util.Random;
 
 class GameCanvas extends JPanel {
     
+	public static Random random = new Random();
 	private Player player;
 	private MouseInfo mouse;		
 	private Sprite currentGun;
 	private EnemyManager enemies;
-	GunManager gunManager = new GunManager();
-	BulletManager bulletManager = new BulletManager();
+	private GunManager gunManager = new GunManager();
+	private BulletManager bulletManager = new BulletManager();
 	private Dimension dimension;
-	Tiles tiles = new Tiles(Toolkit.getDefaultToolkit().createImage("res/levels/floor_1.png"), 64, 64, 64, 64, 4, 4);
-		
+	private Tiles tiles = new Tiles(Toolkit.getDefaultToolkit().createImage("res/levels/floor_1.png"), 64, 64, 64, 64, 4, 4);
+
+	
 	public GameCanvas() {
 		
 	}
@@ -35,7 +38,10 @@ class GameCanvas extends JPanel {
 		player = host;
 		
 		enemies = new EnemyManager(player);
-		enemies.createEnemy();
+		
+		for (int i = 0; i < 5; i++) {
+			enemies.createEnemy();
+		}
 		
 		tiles.loadLevel(0);
 		
