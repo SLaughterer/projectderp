@@ -32,4 +32,22 @@ public class Bullet extends Sprite {
 	public int getShooter() {
 		return shooter;
 	}
+	
+	public int getDamage() {
+		return damage;
+	}
+
+	public void setDamage(int damage) {
+		this.damage = damage;
+	}
+
+	@Override
+	public void move() {
+		if (range > 0) {
+			super.move();
+			range--;
+		} else {
+			setDead(true);
+		}
+	}
 }

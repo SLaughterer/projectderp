@@ -1,4 +1,4 @@
 Name,filelocation,framex,y,imagex,y,dmg,acc,price,rng,rpm,clipsize,reloadtime,bulletlocation
 -----------------------------------------------------------------------------------
-Minigun,res/Weapons/Minigun.png,64,64,64,64,10,10,10,10,2000,100,10,res/bullet.png
-RK,res/Weapons/RK.png,64,64,64,64,10,80,10,10,600,30,2,res/bullet.png
+Minigun,res/Weapons/Minigun.png,64,64,64,64,10,10,10,20,2000,100,10,res/bullet.png
+RK,res/Weapons/RK.png,64,64,64,64,10,80,10,50,600,30,2,res/bullet.png

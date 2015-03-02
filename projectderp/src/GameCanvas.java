@@ -86,6 +86,7 @@ class GameCanvas extends JPanel {
     		bulletManager.moveBullets();
     		bulletManager.drawBullets(g);
     		bulletManager.collisions(player, enemies);
+    		bulletManager.deleteBullets();
     		
     		// healthbar
     		g.drawString("HEALTH", 15, 15);
