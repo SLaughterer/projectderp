@@ -32,4 +32,12 @@ public class Bullet extends Sprite {
 	public int getShooter() {
 		return shooter;
 	}
+	
+	@Override
+	public void move() {
+		if (range > 0) {
+			super.move();
+			range =- getMovementSpeed();
+		}
+	}
 }
