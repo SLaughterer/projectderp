@@ -1,21 +1,26 @@
 import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class EnemyManager {
 	private ArrayList<Enemy> enemies;
 	private Player player;
+	private Random random;
 	
 	public EnemyManager(Player host) {
 		enemies = new ArrayList<Enemy>();
 		player = host;
+		random = GameCanvas.random;
 	}
 	
 	public void createEnemy() {
 		Enemy newEnemy = new Enemy("res/Enemies/Soldier.png", 64, 64, 64, 64);
 		newEnemy.setHitbox(new Hitbox(Hitbox.TYPE_CIRCLE, 16));
 		newEnemy.setMovementSpeed(3);
+		newEnemy.setX(random.nextInt(800));
+		newEnemy.setY(random.nextInt(600));
 		enemies.add(newEnemy);
 	}
 	
@@ -70,5 +75,14 @@ public class EnemyManager {
 	
 	public Enemy getEnemy(int index) {
 		return enemies.get(index);
+	}
+	
+	public void deleteEnemies() {
+		for (int i = 0; i < enemies.size(); i++) {
+			if (enemies.get(i).getHealth() <= 0) {
+				enemies.remove(i);
+				i--;
+			}
+		}
 	}
 }

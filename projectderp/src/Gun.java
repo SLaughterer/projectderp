@@ -34,7 +34,7 @@ public class Gun extends Sprite {
 		this.clipSize = data.getClipSize();
 		this.reloadTime = data.getReloadTime();
 		bulletsInClip = clipSize;
-		random = new Random();
+		random = GameCanvas.random;
 	}
 	
 	public void shoot(int shooter) {
