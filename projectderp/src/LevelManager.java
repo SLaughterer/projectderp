@@ -18,8 +18,6 @@ public class LevelManager {
         try (BufferedReader inputStream = new BufferedReader(new FileReader(fileName))) {
             String line;
             
-            //Skips the first 2 lines.
-            
             while ((line = inputStream.readLine()) != null) {
                 text += line;
                 text += ";";
