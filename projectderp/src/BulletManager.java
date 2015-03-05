@@ -23,7 +23,7 @@ public class BulletManager {
 	
 	public void drawBullets(Graphics g) {
 		for (int i = 0; i < bullets.size(); i++) {
-			bullets.get(i).draw(g);
+			bullets.get(i).drawB(g);
 			//System.out.println("drawing");
 		}
 	}
