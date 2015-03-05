@@ -10,10 +10,10 @@ import java.awt.image.BufferedImage;
  */
 public class BulletData {
 	private BufferedImage img;
-	private int frameWidth = 64;
-	private int frameHeight = 64;
-	private int imageWidth = 64;
-	private int imageHeight = 64;
+	private int frameWidth = 7;
+	private int frameHeight = 7;
+	private int imageWidth = 7;
+	private int imageHeight = 7;
 	
 	public BulletData(BufferedImage img) {
 		this.img = img;
