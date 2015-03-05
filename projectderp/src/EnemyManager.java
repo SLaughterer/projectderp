@@ -1,4 +1,5 @@
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Random;
@@ -9,6 +10,7 @@ public class EnemyManager {
 	private Player player;
 	private Random random;
 	private Ray vision;
+	public static final int MAX_VISION_RANGE = 200;
 	
 	public EnemyManager(Player host) {
 		enemies = new ArrayList<Enemy>();
@@ -46,7 +48,7 @@ public class EnemyManager {
 			vision.setMovementDirection((int) direction);
 			visionRun = (int) distance;
 			
-			while (visionRun >= 0) {
+			while (visionRun >= 0 && visionRun <= MAX_VISION_RANGE) {
 				vision.move();
 				
 				/*
@@ -57,13 +59,14 @@ public class EnemyManager {
 				
 				if (vision.collidesWith(player)) {
 					visible = true;
-					System.out.println(visionRun);
+					enemies.get(i).setLastKnownPos(new Point(vision.getX(), vision.getY()));
+					enemies.get(i).setMoveRandomly(false);
 					break;
 				}
 				visionRun--;
 			}
 			
-			if (!enemies.get(i).collidesWith(player) && distance < 200 && visible) {
+			if (!enemies.get(i).collidesWith(player) && distance < MAX_VISION_RANGE && visible) {
 				
 				enemies.get(i).rotation(direction);
 				enemies.get(i).setMovementDirection((int) direction);
@@ -71,8 +74,11 @@ public class EnemyManager {
 				enemies.get(i).move();
 			} else if (enemies.get(i).collidesWith(player)) {
 				player.alterHealth(-1);
+			} else if (enemies.get(i).isMoveRandomly() == false) {
+				enemies.get(i).moveTowardsLastKnownPos();
 			} else {
 				// move randomly
+				//System.out.println("moving randomly " + i);
 			}
 		}
 	}
