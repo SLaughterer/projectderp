@@ -51,7 +51,7 @@ public class Gun extends Sprite {
 		int newDamage = damage - random.nextInt(damage/2);
 		int direction = (int) (getFacingDirection() + 
 				        (random.nextInt(91) - 45) * (100.0 - accuracy) / 100.0);
-		Bullet bullet = new Bullet(newDamage, direction, range, bulletData, getX(), getY());
+		Bullet bullet = new Bullet(newDamage, direction, range, bulletData, getAnchorX(), getAnchorY());
 		bullet.setShooter(shooter);
 		bullet.setHitbox(new Hitbox(Hitbox.TYPE_CIRCLE, 2));
 		return bullet;
