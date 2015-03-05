@@ -1,4 +1,5 @@
 import java.awt.Image;
+import java.awt.Point;
 
 
 /**
@@ -12,6 +13,8 @@ public class Enemy extends Sprite {
 	private int health;
 	private int damageModifier;
 	private Gun gun;
+	private Point lastKnownPos;
+	private boolean moveRandomly;
 	
 	public Enemy(String img, int imageWidth, int imageHeight) {
 		super(img, imageWidth, imageHeight);
@@ -26,9 +29,42 @@ public class Enemy extends Sprite {
 	
 	public void initialize() {
 		getGun();
+		moveRandomly = true;
 	}
 	
-    public void getGun() {
+	public void moveTowardsLastKnownPos() {
+		int distance = (int) Sprite.calculateDistance(
+				getAnchorX(), getAnchorY(), 
+				(int) lastKnownPos.getX(), (int) lastKnownPos.getY());
+		int direction = (int) Sprite.calculateDirection(
+				getAnchorX(), getAnchorY(), lastKnownPos);
+		
+		rotation(direction);
+		setMovementDirection(direction);
+		move();
+		
+		if (distance <= 20) {
+			moveRandomly = true;
+		}
+	}
+	
+    public Point getLastKnownPos() {
+		return lastKnownPos;
+	}
+
+	public void setLastKnownPos(Point lastKnownPos) {
+		this.lastKnownPos = lastKnownPos;
+	}
+
+	public boolean isMoveRandomly() {
+		return moveRandomly;
+	}
+
+	public void setMoveRandomly(boolean moveRandomly) {
+		this.moveRandomly = moveRandomly;
+	}
+
+	public void getGun() {
     	GunData data = GunManager.armory.get(0);
     	gun = GunManager.requestGun(data);
     }
