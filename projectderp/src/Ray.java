@@ -1,10 +1,8 @@
 
 public class Ray extends Sprite {
-	public Ray(int posX, int posY, int movementDirection) {
+	public Ray() {
 		super();
-		setX(posX);
-		setY(posY);
-		setMovementDirection(movementDirection);
-		setHitbox(new Hitbox(Hitbox.TYPE_CIRCLE, 1));
+		setMovementSpeed(4);
+		setHitbox(new Hitbox(Hitbox.TYPE_CIRCLE, 10));
 	}
 }
