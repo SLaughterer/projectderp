@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
 import javax.imageio.ImageIO;
 
 class Sprite {
@@ -337,8 +338,10 @@ class Sprite {
         tr.rotate(rotation, frameWidth/2, frameHeight/2);
         
         g2d.drawImage(imgSub[frame], tr, null);
+        //g2d.drawImage(imgSub[frame], op, posX, posY);
     }
     
+    /*
     //***************************************************
     //TEMPORARY SOLUTION TO FIX SHOOTING LAGGING THE GAME
     //***************************************************
@@ -346,10 +349,11 @@ class Sprite {
         Graphics2D g2d = (Graphics2D) g;
     	
         tr.setTransform(flipValue, 0, 0, 1, flipReposition+posX, 0+posY);
-        //tr.rotate(rotation, frameWidth/2, frameHeight/2);
+        tr.rotate(rotation, frameWidth/2, frameHeight/2);
         
         g2d.drawImage(imgSub[frame], tr, null);
     }
+    */
     
     /**
      * Determines if Sprite is touching another Sprite.
