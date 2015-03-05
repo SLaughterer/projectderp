@@ -339,6 +339,18 @@ class Sprite {
         g2d.drawImage(imgSub[frame], tr, null);
     }
     
+    //***************************************************
+    //TEMPORARY SOLUTION TO FIX SHOOTING LAGGING THE GAME
+    //***************************************************
+    public void drawB(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+    	
+        tr.setTransform(flipValue, 0, 0, 1, flipReposition+posX, 0+posY);
+        //tr.rotate(rotation, frameWidth/2, frameHeight/2);
+        
+        g2d.drawImage(imgSub[frame], tr, null);
+    }
+    
     /**
      * Determines if Sprite is touching another Sprite.
      *
