@@ -137,7 +137,11 @@ class Sprite {
     private BufferedImage[] imgSub;
     private Hitbox hitbox;
     private boolean isDead;
-     
+    
+    public Sprite() {
+    	
+    }
+    
     /**
      * Creates a non-animated Sprite.
      *
