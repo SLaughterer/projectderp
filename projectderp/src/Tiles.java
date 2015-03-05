@@ -54,7 +54,7 @@ class Tiles {
      * The height of the image file.
      */
     private int imageHeight;
-    LevelManager levels = new LevelManager();
+    LevelManager levels = GameCanvas.levels;
     
     /**
      * Constructs the tile layer and initializes it.
@@ -176,8 +176,8 @@ class Tiles {
     	}
     }
     
-    public void loadLevel(int index) {
-    	tile = levels.getLevel(index).readLevel();
+    public void loadBackground(int index) {
+    	tile = levels.getLevel(index).readBackground();
     }
     
     /**
