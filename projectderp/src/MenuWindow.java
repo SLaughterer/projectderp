@@ -46,12 +46,7 @@ class MenuWindow extends JFrame {
      * 
      */
     private JTextField textField;
-    
-    /**
-     * 
-     */
-    private String playerName = "Defaultiina";
-    
+        
     public MenuWindow() {
         windowWidth = 600;
         windowHeight = 500;
@@ -85,7 +80,7 @@ class MenuWindow extends JFrame {
         playButton.setPreferredSize(new Dimension(140, 60));
         optionsButton.setPreferredSize(new Dimension(140, 60));
         
-        textField = new JTextField("Your name here (press Enter)", 15);
+        textField = new JTextField("Your name here", 15);
               
         canvas.add(playButton, BorderLayout.LINE_START);
         canvas.add(optionsButton, BorderLayout.CENTER);
@@ -123,13 +118,5 @@ class MenuWindow extends JFrame {
         		//setVisible(false);
         	}  	
         });   
-        
-/*       textField.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent arg0) {
-        		
-        	     textField.selectAll();
-        	}  	
-        });  
-*/
     }
 }
