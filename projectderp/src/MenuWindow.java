@@ -114,8 +114,6 @@ class MenuWindow extends JFrame {
         		System.out.println("options");
         		
         		OptionsWindow optionsWindow = new OptionsWindow();
-        				
-        		//setVisible(false);
         	}  	
         });   
     }
