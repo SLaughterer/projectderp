@@ -109,14 +109,17 @@ class GameCanvas extends JPanel {
     		g.fillRect(15, 20, player.getHealth(), 20);
     		
     		g.setColor(Color.BLACK);
+    		
+    		// current gun
+    		updateUserInterface();
+    		currentGun.draw(g);
+    		
+    		// player name
+    		g.drawString(player.getName(), dimension.width - 150, 15);
     		    		
     		// score
     		g.drawString("SCORE", dimension.width - 75, 15);
     		g.drawString(String.format("%08d", player.getScore()), dimension.width - 75, 30);
-    		    		    		   
-    		// current gun
-    		updateUserInterface();
-    		currentGun.draw(g);
     	}
     }
     
