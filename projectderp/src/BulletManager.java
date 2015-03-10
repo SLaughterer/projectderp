@@ -34,7 +34,8 @@ public class BulletManager {
 			if (bullets.get(i).getShooter() == Bullet.PLAYER) {
 				for (int n = 0; n < enemies.size(); n++) {
 					if (Hitbox.collisionCheck(bullets.get(i), enemies.getEnemy(n))) {
-						enemies.getEnemy(n).AlterHealth(-bullets.get(i).getDamage());
+						enemies.getEnemy(n).alterHealth(-bullets.get(i).getDamage());
+						enemies.checkHealth(n);
 						player.addScore(1);
 					}
 				}
