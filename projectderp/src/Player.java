@@ -29,6 +29,8 @@ public class Player extends Sprite {
 	private Gun gun;
 	private boolean isShooting;
 	
+    private String name;
+	
 	/**
      * Creates a non-animated Player sprite.
      *
@@ -204,4 +206,12 @@ public class Player extends Sprite {
     	health = 100;
     	score = 0;
     }
+    
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String getName() {
+		return name;
+	}
 }

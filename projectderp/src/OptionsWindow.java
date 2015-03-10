@@ -27,17 +27,7 @@ class OptionsWindow extends JFrame {
      * Desired height of the window.
      */
     private int windowHeight;
-    
-    /**
-     * Tracks mouse activity.
-     */
-    private GameMouseListener mouseListener;
-    
-    /**
-     * Tracks keyboard activity.
-     */
-    private GameKeyListener keyListener;
-    
+
     /**
      * Constructs the window used in the game engine.
      */
@@ -48,20 +38,14 @@ class OptionsWindow extends JFrame {
         windowWidth = 600;
         windowHeight = 500;
         canvas = new GameCanvas();
-        mouseListener = new GameMouseListener();
-        keyListener = new GameKeyListener(this);
         
         canvas.setPreferredSize(
                 new Dimension(windowWidth, windowHeight));
         
-        canvas.addMouseListener(mouseListener);
-        canvas.addMouseWheelListener(mouseListener);
-        this.addKeyListener(keyListener);
-        
         add(canvas);
-        
+
         // Add components here.
-        
+
         setTitle("Options Window");
         pack();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);

@@ -2,6 +2,7 @@
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JTextField;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -26,39 +27,34 @@ class MenuWindow extends JFrame {
      * Desired height of the window.
      */
     private int windowHeight;
-    
-    /**
-     * Tracks mouse activity.
-     */
-    private GameMouseListener mouseListener;
-    
-    /**
-     * Tracks keyboard activity.
-     */
-    private GameKeyListener keyListener;
-    
+
     /**
      * Constructs the window used in the game engine.
      */
     
+    /**
+     * 
+     */
     private JButton playButton, optionsButton;
     
+    /**
+     * 
+     */
     private MenuWindow menuWindow = this;
     
+    /**
+     * 
+     */
+    private JTextField textField;
+        
     public MenuWindow() {
         windowWidth = 600;
         windowHeight = 500;
         
         canvas = new GameCanvas();
-        mouseListener = new GameMouseListener();
-        keyListener = new GameKeyListener(this);
         
         canvas.setPreferredSize(
                 new Dimension(windowWidth, windowHeight));
-        
-        canvas.addMouseListener(mouseListener);
-        canvas.addMouseWheelListener(mouseListener);
-        this.addKeyListener(keyListener);
         
         add(canvas);
         
@@ -83,20 +79,22 @@ class MenuWindow extends JFrame {
         
         playButton.setPreferredSize(new Dimension(140, 60));
         optionsButton.setPreferredSize(new Dimension(140, 60));
+        
+        textField = new JTextField("Your name here", 15);
               
-        canvas.add( playButton, BorderLayout.LINE_START);
-        canvas.add( optionsButton, BorderLayout.CENTER);
+        canvas.add(playButton, BorderLayout.LINE_START);
+        canvas.add(optionsButton, BorderLayout.CENTER);
+        canvas.add(textField, BorderLayout.LINE_END);
              
         playButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
         		
-        		System.out.println("testing");
-        				
         		GameWindow gameWindow;
         		GameLoop gameLoop;
 				
         		try {
-					gameWindow = new GameWindow(menuWindow);
+        			// 
+					gameWindow = new GameWindow(menuWindow, textField.getText());
 					gameLoop = new GameLoop(gameWindow);
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
@@ -116,8 +114,6 @@ class MenuWindow extends JFrame {
         		System.out.println("options");
         		
         		OptionsWindow optionsWindow = new OptionsWindow();
-        				
-        		//setVisible(false);
         	}  	
         });   
     }
