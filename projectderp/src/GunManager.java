@@ -72,6 +72,10 @@ public class GunManager {
 		return gun;
 	}
 	
+	public static void deleteGun(Gun gun) {
+		guns.remove(gun);
+	}
+	
 	public LinkedList<GunData> requestArmory() {
 		return armory;
 	}

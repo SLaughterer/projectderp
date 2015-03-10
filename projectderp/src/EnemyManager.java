@@ -140,12 +140,10 @@ public class EnemyManager {
 		return enemies.get(index);
 	}
 	
-	public void deleteEnemies() {
-		for (int i = 0; i < enemies.size(); i++) {
-			if (enemies.get(i).getHealth() <= 0) {
-				enemies.remove(i);
-				i--;
-			}
+	public void checkHealth(int index) {
+		if (enemies.get(index).getHealth() <= 0) {
+			GunManager.deleteGun(enemies.get(index).getGun());
+			enemies.remove(index);
 		}
 	}
 }

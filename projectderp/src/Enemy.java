@@ -29,8 +29,9 @@ public class Enemy extends Sprite {
 	}
 	
 	public void initialize() {
-		getGun();
+		setGun();
 		moveRandomly = true;
+		health = 100;
 	}
 	
 	public void moveTowardsLastKnownPos() {
@@ -65,10 +66,14 @@ public class Enemy extends Sprite {
 		this.moveRandomly = moveRandomly;
 	}
 
-	public void getGun() {
+	public void setGun() {
     	GunData data = GunManager.armory.get(0);
     	gun = GunManager.requestGun(data);
     }
+	
+	public Gun getGun() {
+		return gun;
+	}
 
 	public int getHealth() {
 		return health;
@@ -78,7 +83,7 @@ public class Enemy extends Sprite {
 		this.health = health;
 	}
 
-	public void AlterHealth(int value) {
+	public void alterHealth(int value) {
 		health += value;
 	}
 	
@@ -108,5 +113,4 @@ public class Enemy extends Sprite {
 	public void shoot() {
 		gun.shoot(Bullet.ENEMY);
 	}
-	
 }
