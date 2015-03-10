@@ -85,7 +85,6 @@ public class Player extends Sprite {
      */
     private void initializePlayer() {
         super.setMovementSpeed(Player.DEFAULT_SPEED);
-        gun = GunManager.requestGun(GunManager.armory.get(1));
         health = 100;
     }
     
@@ -182,7 +181,15 @@ public class Player extends Sprite {
 	public void shoot() {
 		gun.shoot(Bullet.PLAYER);
 	}
-	
+
+    public void setGun() {
+    	gun = GunManager.requestGun(GunManager.armory.get(1));
+    }
+    
+    public Gun getGun() {
+    	return gun;
+    }
+    
     public void alterHealth(int damage) {
     	
     	health += damage;

@@ -5,7 +5,6 @@
  * @version 2014.1217
  * @since 1.7
  */
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import java.awt.Color;
@@ -18,23 +17,29 @@ import java.util.Random;
 
 class GameCanvas extends JPanel {
     
-	public static Random random = new Random();
+	public static Random random;
 	private Player player;
 	private MouseInfo mouse;		
 	private Sprite currentGun;
 	private EnemyManager enemies;
-	private GunManager gunManager = new GunManager();
-	private BulletManager bulletManager = new BulletManager();
+	private GunManager gunManager;
+	private BulletManager bulletManager;
 	private Dimension dimension;
-	public static LevelManager levels = new LevelManager();
-	private Tiles tiles = new Tiles(Toolkit.getDefaultToolkit().createImage("res/levels/floor_1.png"), 64, 64, 64, 64, levels.getWidth(), levels.getHeight());
+	public static LevelManager levels;
+	private Tiles tiles;
 	
 	public GameCanvas() {
 		
 	}
 	
 	public GameCanvas(Player host) {
-		
+		random = new Random();
+		gunManager = new GunManager();
+		bulletManager = new BulletManager();
+		levels = new LevelManager();
+		tiles = new Tiles(
+			Toolkit.getDefaultToolkit().createImage("res/levels/floor_1.png"),
+			64, 64, 64, 64, levels.getWidth(), levels.getHeight());
 		player = host;
 		
 		enemies = new EnemyManager(player);

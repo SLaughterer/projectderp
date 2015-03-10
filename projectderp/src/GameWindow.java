@@ -85,6 +85,8 @@ class GameWindow extends JFrame {
         player.setY(windowHeight/2 - 32);
         
         canvas = new GameCanvas(player);
+        player.setGun();
+        
         // acquire memory location of EnemyManager.
         enemies = canvas.getEnemyManager();
         mouseListener = new GameMouseListener(player);
