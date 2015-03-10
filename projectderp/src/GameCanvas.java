@@ -53,7 +53,7 @@ class GameCanvas extends JPanel {
 		
 		userInterface();
 	}
-					
+	
     public void userInterface() {
     	
     	// minigun is placeholder

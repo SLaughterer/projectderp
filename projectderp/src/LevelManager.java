@@ -77,6 +77,10 @@ public class LevelManager {
 		return height;
 	}
 
+	public LinkedList getWalls() {
+		return walls;
+	}
+	
 	public static Level getLevel(int index) {
 		return levels.get(index);
 	}
@@ -110,6 +114,9 @@ public class LevelManager {
 					wall.setX(i * wall.getWidth());
 					wall.setY(j * wall.getHeight());
 					
+					// for testing purposes
+					wall.addHitbox(new Hitbox(Hitbox.TYPE_RECTANGLE, 64, 64), 0, 0);
+					
 					if (wallData[j][i] != 00) {
 						switch (wallData[j][i]) {
 							case 1:
@@ -128,6 +135,33 @@ public class LevelManager {
 				}
 			}
 		}
+	}
+	
+	public boolean collidesWithWall(Sprite sprite) {
+		boolean collides = false;
+		int distance;
+		
+		for (int i = 0; i < walls.size(); i++) {
+			distance = (int) Sprite.calculateDistance(
+					walls.get(i).getAnchorX(), walls.get(i).getAnchorY(),
+					sprite.getAnchorX(), sprite.getAnchorY());
+			if (distance < 100) {
+				for (int n = 0; n < walls.get(i).getHitboxes().size(); n++) {
+					if (sprite.collidesWith((Sprite) walls.get(i).getHitboxes().get(n))) {
+						collides = true;
+						
+						if (sprite instanceof Player) {
+							Player player = (Player) sprite;
+							player.stepBack();
+							
+						}
+						break;
+					}
+				}
+			}
+		}
+		
+		return collides;
 	}
 	
 	public void draw(Graphics g) {

@@ -136,6 +136,14 @@ public class Player extends Sprite {
     	//move();
     }
     
+    public void stepBack() {
+    	setMovementX(getMovementX() * -1);
+    	setMovementY(getMovementY() * -1);
+    	move();
+    	stopVerticalMovement();
+    	stopHorizontalMovement();
+    }
+    
     public void stopVerticalMovement() {
     	setMovementY(0);
     }
