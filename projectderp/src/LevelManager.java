@@ -36,15 +36,7 @@ public class LevelManager {
 	public void initialize() {
 		String rawData = null;
 		
-		//try {
-			rawData = open("res/Levels/Level01.txt");
-		/*} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		//} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
+		rawData = open("res/Levels/Level01.txt");
 		
 		width = Integer.parseInt(rawData.substring(0, 2));
 		height = Integer.parseInt(rawData.substring(3, 5));
@@ -57,7 +49,7 @@ public class LevelManager {
 			String[] rows = rawData.split(";", height + 1);
 			
 			if (l != 2) {
-				rawData = rawData.substring(width * height * 3 + 1);
+				rawData = rawData.substring(width * height * 2 + 1);
 			}
 			
 			String[][] cells = new String[width][height];
