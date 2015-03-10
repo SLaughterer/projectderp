@@ -70,7 +70,7 @@ class GameWindow extends JFrame {
      * @throws IOException 
      * @throws FileNotFoundException 
      */
-    public GameWindow(final MenuWindow menu) throws FileNotFoundException, IOException {
+    public GameWindow(final MenuWindow menu, String playerName) throws FileNotFoundException, IOException {
     	
     	this.menu = menu;
         windowWidth = 800;
@@ -83,6 +83,7 @@ class GameWindow extends JFrame {
         player.setHitbox(new Hitbox(Hitbox.TYPE_CIRCLE, 16));
         player.setX(windowWidth/2 - 32);
         player.setY(windowHeight/2 - 32);
+        player.setName(playerName);
         
         canvas = new GameCanvas(player);
         player.setGun();
