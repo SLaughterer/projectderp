@@ -48,7 +48,10 @@ public class Gun extends Sprite {
 	}
 	
 	private Bullet newBullet(int shooter) {
+		// Randomizes damage from full to half.
 		int newDamage = damage - random.nextInt(damage/2);
+		// Randomizes accuracy, 100 accuracy has no randomization, 0 accuracy
+		// randomizes the shot in 90 degree angle in front of the player.
 		int direction = (int) (getFacingDirection() + 
 				        (random.nextInt(91) - 45) * (100.0 - accuracy) / 100.0);
 		Bullet bullet = new Bullet(newDamage, direction, range, bulletData, getAnchorX(), getAnchorY());
@@ -58,15 +61,18 @@ public class Gun extends Sprite {
 	}
 	
 	private void initializeCooldown() {
+		// Cooldown is counted from weapon RPM, bigger it is, less the cooldown.
 		cooldown = 30 / (roundsPerMinute / 60);
 	}
 	
 	private void initializeReload() {
+		// Now cooldown is used to count down reload time.
 		cooldown = 30 * reloadTime;
 		bulletsInClip = clipSize;
 	}
 	
 	public void cool() {
+		// Called every frame to reduce positive cooldown counter.
 		if (cooldown > 0) {
 			cooldown--;
 		}
