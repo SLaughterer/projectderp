@@ -36,6 +36,8 @@ public class EnemyManager {
 		
 		for (int i = 0; i < enemies.size(); i++) {
 			visible = false;
+			enemies.get(i).setPlayerInSight(false);
+			
 			distance = Sprite.calculateDistance(
 					enemies.get(i).getAnchorX(), enemies.get(i).getAnchorY(), 
 					player.getAnchorX(), player.getAnchorY());
@@ -61,6 +63,7 @@ public class EnemyManager {
 					visible = true;
 					enemies.get(i).setLastKnownPos(new Point(vision.getX(), vision.getY()));
 					enemies.get(i).setMoveRandomly(false);
+					enemies.get(i).setPlayerInSight(true);
 					break;
 				}
 				visionRun--;
@@ -92,8 +95,9 @@ public class EnemyManager {
 	
 	public void shoot() {
 		for (int i = 0; i < enemies.size(); i++) {
-			//if enemy sees player
-			enemies.get(i).shoot();
+			if (enemies.get(i).isPlayerInSight()) {
+				enemies.get(i).shoot();
+			}
 		}
 	}
 	

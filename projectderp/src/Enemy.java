@@ -15,6 +15,7 @@ public class Enemy extends Sprite {
 	private Gun gun;
 	private Point lastKnownPos;
 	private boolean moveRandomly;
+	private boolean playerInSight;
 	
 	public Enemy(String img, int imageWidth, int imageHeight) {
 		super(img, imageWidth, imageHeight);
@@ -89,6 +90,14 @@ public class Enemy extends Sprite {
 		this.damageModifier = damageModifier;
 	}
 	
+	public boolean isPlayerInSight() {
+		return playerInSight;
+	}
+
+	public void setPlayerInSight(boolean playerInSight) {
+		this.playerInSight = playerInSight;
+	}
+
 	public void moveGun() {
 		gun.rotation(this.getFacingDirection());
 		gun.setX(this.getX());
