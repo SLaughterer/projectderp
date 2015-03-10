@@ -1,6 +1,5 @@
 import java.awt.Graphics;
 import java.awt.Point;
-import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -10,6 +9,7 @@ public class EnemyManager {
 	private Player player;
 	private Random random;
 	private Ray vision;
+	private int timer;
 	public static final int MAX_VISION_RANGE = 200;
 	
 	public EnemyManager(Player host) {
@@ -32,55 +32,79 @@ public class EnemyManager {
 		double direction;
 		double distance;
 		boolean visible;
-		int visionRun;
+		//int visionRun;
 		
 		for (int i = 0; i < enemies.size(); i++) {
 			visible = false;
+			enemies.get(i).setPlayerInSight(false);
+			
+			// distance between player and enemy i
 			distance = Sprite.calculateDistance(
 					enemies.get(i).getAnchorX(), enemies.get(i).getAnchorY(), 
 					player.getAnchorX(), player.getAnchorY());
+			
+			// direction relatively from enemy to player in degrees
 			direction = Sprite.calculateDirection(
 					enemies.get(i).getAnchorX(), enemies.get(i).getAnchorY(), 
 					player.getAnchorX(), player.getAnchorY());
 			
-			vision.setX(enemies.get(i).getAnchorX());
-			vision.setY(enemies.get(i).getAnchorY());
-			vision.setMovementDirection((int) direction);
-			visionRun = (int) distance;
-			
-			while (visionRun >= 0 && visionRun <= MAX_VISION_RANGE) {
-				vision.move();
-				
-				/*
-				if (vision.collidesWith(wall)) {
-					break;
-				}
-				*/
-				
-				if (vision.collidesWith(player)) {
-					visible = true;
-					enemies.get(i).setLastKnownPos(new Point(vision.getX(), vision.getY()));
-					enemies.get(i).setMoveRandomly(false);
-					break;
-				}
-				visionRun--;
-			}
+			// does enemy see player?
+			visible = isPlayerVisibleFor(enemies.get(i), direction, distance);
 			
 			if (!enemies.get(i).collidesWith(player) && distance < MAX_VISION_RANGE && visible) {
-				
+				// move towards player
 				enemies.get(i).rotation(direction);
 				enemies.get(i).setMovementDirection((int) direction);
-				
-				enemies.get(i).move();
 			} else if (enemies.get(i).collidesWith(player)) {
+				// melee
 				player.alterHealth(-1);
 			} else if (enemies.get(i).isMoveRandomly() == false) {
+				// move to last position enemy saw player at
 				enemies.get(i).moveTowardsLastKnownPos();
 			} else {
 				// move randomly
-				//System.out.println("moving randomly " + i);
+				if (timer > random.nextInt(10) + 10) {
+					direction = random.nextInt(360);
+					enemies.get(i).rotation(direction);
+					enemies.get(i).setMovementDirection((int) direction);
+					timer = 0;
+				} else {
+					timer++;
+				}
 			}
+			enemies.get(i).move();
 		}
+	}
+	
+	private boolean isPlayerVisibleFor(Enemy enemy, double direction, double distance) {
+		boolean visible = false;
+		
+		int visionRun;
+		vision.setX(enemy.getAnchorX());
+		vision.setY(enemy.getAnchorY());
+		vision.setMovementDirection((int) direction);
+		visionRun = (int) distance;
+		
+		while (visionRun >= 0 && visionRun <= MAX_VISION_RANGE) {
+			vision.move();
+			
+			/*
+			if (vision.collidesWith(wall)) {
+				break;
+			}
+			*/
+			
+			if (vision.collidesWith(player)) {
+				visible = true;
+				enemy.setLastKnownPos(new Point(vision.getX(), vision.getY()));
+				enemy.setMoveRandomly(false);
+				enemy.setPlayerInSight(true);
+				break;
+			}
+			visionRun--;
+		}
+		
+		return visible;
 	}
 	
 	public void drawEnemies(Graphics g) {
@@ -92,8 +116,9 @@ public class EnemyManager {
 	
 	public void shoot() {
 		for (int i = 0; i < enemies.size(); i++) {
-			//if enemy sees player
-			enemies.get(i).shoot();
+			if (enemies.get(i).isPlayerInSight()) {
+				enemies.get(i).shoot();
+			}
 		}
 	}
 	
