@@ -78,28 +78,14 @@ class GameCanvas extends JPanel {
         	tiles.draw(g);
         	levels.draw(g);
         	
-    		player.move();
-    		player.rotation(Sprite.calculateDirection(
-    				player.getAnchorX(), player.getAnchorY(), 
-    				mousePosition()));
+        	updatePlayer();
+        	updateEnemies();
+        	updateGuns();
+        	
     		player.draw(g);
-    		player.moveGun();
-    		
-    		if (player.isShooting()) {
-    			player.shoot();
-    		}
-    		
-    		enemies.moveEnemies();
     		enemies.drawEnemies(g);
-    		enemies.moveGun();
-    		enemies.shoot();
-    		
     		gunManager.drawGuns(g);
-    		
-    		bulletManager.moveBullets();
     		bulletManager.drawBullets(g);
-    		bulletManager.collisions(player, enemies);
-    		bulletManager.deleteBullets();
     		
     		// healthbar
     		g.drawString("HEALTH", 15, 15);
@@ -121,6 +107,30 @@ class GameCanvas extends JPanel {
     		g.drawString("SCORE", dimension.width - 75, 15);
     		g.drawString(String.format("%08d", player.getScore()), dimension.width - 75, 30);
     	}
+    }
+    
+    private void updatePlayer() {
+    	player.move();
+		player.rotation(Sprite.calculateDirection(
+				player.getAnchorX(), player.getAnchorY(), 
+				mousePosition()));
+		player.moveGun();
+		
+		if (player.isShooting()) {
+			player.shoot();
+		}
+    }
+    
+    private void updateEnemies() {
+    	enemies.moveEnemies();
+    	enemies.moveGun();
+		enemies.shoot();
+    }
+    
+    private void updateGuns() {
+    	bulletManager.moveBullets();
+    	bulletManager.collisions(player, enemies);
+		bulletManager.deleteBullets();
     }
     
     public void updateUserInterface() {
