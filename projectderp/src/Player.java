@@ -144,13 +144,7 @@ public class Player extends Sprite {
     	stopHorizontalMovement();
     }
     
-    public void stopVerticalMovement() {
-    	setMovementY(0);
-    }
     
-    public void stopHorizontalMovement() {
-    	setMovementX(0);
-    }
     
     public void setHealth(int newHealth) {
     	

@@ -140,19 +140,37 @@ public class LevelManager {
 	public boolean collidesWithWall(Sprite sprite) {
 		boolean collides = false;
 		int distance;
+		Wall thisWall;
 		
 		for (int i = 0; i < walls.size(); i++) {
+			thisWall = walls.get(i);
 			distance = (int) Sprite.calculateDistance(
-					walls.get(i).getAnchorX(), walls.get(i).getAnchorY(),
+					thisWall.getAnchorX(), thisWall.getAnchorY(),
 					sprite.getAnchorX(), sprite.getAnchorY());
 			if (distance < 100) {
-				for (int n = 0; n < walls.get(i).getHitboxes().size(); n++) {
-					if (sprite.collidesWith((Sprite) walls.get(i).getHitboxes().get(n))) {
+				for (int n = 0; n < thisWall.getHitboxes().size(); n++) {
+					
+					if (sprite.collidesWith((Sprite) thisWall.getHitboxes().get(n))) {
 						collides = true;
 						
+						if (Hitbox.verticallyAligned(sprite, (Sprite) thisWall.getHitboxes().get(n))) {
+				        	if (thisWall.getAnchorY() < sprite.getAnchorY()) {
+				        		sprite.stopMovementUp();
+				        	} else {
+				        		sprite.stopMovementDown();
+				        	}
+				        }
+				        
+				        if (Hitbox.horizontallyAligned(sprite, (Sprite) thisWall.getHitboxes().get(n))) {
+				        	if (thisWall.getAnchorX() > sprite.getAnchorX()) {
+				        		sprite.stopMovementRight();
+				        	} else {
+				        		sprite.stopMovementLeft();
+				        	}
+				        }
+				        
 						if (sprite instanceof Player) {
 							Player player = (Player) sprite;
-							player.stepBack();
 							
 						}
 						break;

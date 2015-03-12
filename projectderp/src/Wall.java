@@ -34,7 +34,7 @@ public class Wall extends Sprite {
 		hitboxes.add(ray);
 	}
 	
-	public ArrayList getHitboxes() {
+	public ArrayList<Ray> getHitboxes() {
 		return hitboxes;
 	}
 }
