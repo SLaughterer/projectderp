@@ -42,7 +42,7 @@ class GameCanvas extends JPanel {
 			64, 64, 64, 64, levels.getWidth(), levels.getHeight());
 		player = host;
 		
-		enemies = new EnemyManager(player);
+		enemies = new EnemyManager(player, levels);
 		
 		for (int i = 0; i < 5; i++) {
 			enemies.createEnemy();
@@ -110,6 +110,7 @@ class GameCanvas extends JPanel {
     }
     
     private void updatePlayer() {
+    	levels.collidesWithWall(player);
     	player.move();
 		player.rotation(Sprite.calculateDirection(
 				player.getAnchorX(), player.getAnchorY(), 

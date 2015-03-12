@@ -375,6 +375,38 @@ class Sprite {
         return collides;
     }
     
+    public void stopVerticalMovement() {
+    	setMovementY(0);
+    }
+    
+    public void stopHorizontalMovement() {
+    	setMovementX(0);
+    }
+    
+    public void stopMovementUp() {
+    	if (movementY < 0) {
+    		movementY = 0;
+    	}
+    }
+    
+    public void stopMovementDown() {
+    	if (movementY > 0) {
+    		movementY = 0;
+    	}
+    }
+    
+    public void stopMovementLeft() {
+    	if (movementX < 0) {
+    		movementX = 0;
+    	}
+    }
+    
+    public void stopMovementRight() {
+    	if (movementX > 0) {
+    		movementX = 0;
+    	}
+    }
+    
     /**
      * Changes the Sprite's movement speed and direction.
      *

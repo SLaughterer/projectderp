@@ -7,14 +7,16 @@ import java.util.Random;
 public class EnemyManager {
 	private ArrayList<Enemy> enemies;
 	private Player player;
+	private LevelManager levels;
 	private Random random;
 	private Ray vision;
 	private int timer;
 	public static final int MAX_VISION_RANGE = 200;
 	
-	public EnemyManager(Player host) {
+	public EnemyManager(Player host, LevelManager levels) {
 		enemies = new ArrayList<Enemy>();
 		player = host;
+		this.levels = levels;
 		random = GameCanvas.random;
 		vision = new Ray();
 	}
@@ -57,6 +59,8 @@ public class EnemyManager {
 				enemies.get(i).setMovementDirection((int) direction);
 			} else if (enemies.get(i).collidesWith(player)) {
 				// melee
+				enemies.get(i).stopHorizontalMovement();
+				enemies.get(i).stopVerticalMovement();
 				player.alterHealth(-1);
 			} else if (enemies.get(i).isMoveRandomly() == false) {
 				// move to last position enemy saw player at
@@ -72,6 +76,8 @@ public class EnemyManager {
 					timer++;
 				}
 			}
+			
+			levels.collidesWithWall(enemies.get(i));
 			enemies.get(i).move();
 		}
 	}
