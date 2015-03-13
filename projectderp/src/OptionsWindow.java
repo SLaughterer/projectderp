@@ -10,6 +10,9 @@ import javax.swing.event.ChangeListener;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JRadioButton;
+import javax.swing.JCheckBox;
+import java.awt.BorderLayout;
 
 class OptionsWindow extends JFrame {
     
@@ -42,7 +45,7 @@ class OptionsWindow extends JFrame {
         canvas.setPreferredSize(
                 new Dimension(windowWidth, windowHeight));
         
-        add(canvas);
+        getContentPane().add(canvas, BorderLayout.SOUTH);
 
         // Add components here.
 
@@ -56,8 +59,10 @@ class OptionsWindow extends JFrame {
     }
     
     public void options() {
+        canvas.setLayout(null);
     	
         JLabel title = new JLabel("OPTIONS");
+        title.setBounds(238, 13, 134, 50);
         title.setPreferredSize(new Dimension(200, 50));
         title.setFont (title.getFont ().deriveFont (32.0f));
         canvas.add(title);
@@ -65,6 +70,7 @@ class OptionsWindow extends JFrame {
     	ImageIcon menuButtonIcon = new ImageIcon("res/menuButton.png");
     	
     	menuButton = new JButton(menuButtonIcon);        
+    	menuButton.setBounds(12, 13, 140, 60);
     	menuButton.setPreferredSize(new Dimension(140, 60));  
         canvas.add( menuButton);
 
@@ -75,6 +81,7 @@ class OptionsWindow extends JFrame {
         });     
         
         JLabel spacing = new JLabel();
+        spacing.setBounds(372, 35, 0, 0);
         // title.setPreferredSize(new Dimension(50, 50));
         canvas.add(spacing);
         
@@ -84,6 +91,7 @@ class OptionsWindow extends JFrame {
         final int INIT = 15;
 
         JSlider sliderTemplate = new JSlider(JSlider.HORIZONTAL, MIN, MAX, INIT);
+        sliderTemplate.setBounds(206, 123, 200, 52);
         
         sliderTemplate.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
@@ -113,5 +121,21 @@ class OptionsWindow extends JFrame {
         sliderTemplate.setMinorTickSpacing(2);
         sliderTemplate.setPaintTicks(true);
         sliderTemplate.setPaintLabels(true);
+        
+        JLabel lblSlidertemplate = new JLabel("SliderTemplate");
+        lblSlidertemplate.setBounds(266, 94, 106, 16);
+        canvas.add(lblSlidertemplate);
+        
+        JRadioButton rdbtnRadio = new JRadioButton("RADIO BUTTON");
+        rdbtnRadio.setBounds(206, 219, 127, 25);
+        canvas.add(rdbtnRadio);
+        
+        JCheckBox chckbxCheckbox = new JCheckBox("CHECKBOX1");
+        chckbxCheckbox.setBounds(206, 260, 113, 25);
+        canvas.add(chckbxCheckbox);
+        
+        JCheckBox chckbxCheckbox_1 = new JCheckBox("CHECKBOX2");
+        chckbxCheckbox_1.setBounds(206, 301, 113, 25);
+        canvas.add(chckbxCheckbox_1);
     }
 }
