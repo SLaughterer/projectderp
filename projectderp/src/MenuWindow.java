@@ -1,15 +1,19 @@
 
+import javax.annotation.PostConstruct;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
+import java.awt.Composite;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.BorderLayout;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import javax.swing.JLabel;
+import java.awt.Font;
 
 class MenuWindow extends JFrame {
     
@@ -56,7 +60,7 @@ class MenuWindow extends JFrame {
         canvas.setPreferredSize(
                 new Dimension(windowWidth, windowHeight));
         
-        add(canvas);
+        getContentPane().add(canvas, BorderLayout.CENTER);
         
         // Add components here.
         
@@ -69,22 +73,45 @@ class MenuWindow extends JFrame {
         setVisible(true);
     }
     
+    
+    /**
+     * Needed for WindowBuilder.
+     * @param parent
+     */
+    @PostConstruct
+    public void createControls(Composite parent) {
+
+    } 
+    
     public void menu() {
     	    	
     	ImageIcon playButtonIcon = new ImageIcon("res/playButton.png");
     	ImageIcon optionsButtonIcon = new ImageIcon("res/optionsButton.png");
     	
         playButton = new JButton(playButtonIcon);        
+        playButton.setBounds(428, 33, 140, 60);
         optionsButton = new JButton(optionsButtonIcon);
+        optionsButton.setBounds(428, 109, 140, 60);
         
         playButton.setPreferredSize(new Dimension(140, 60));
         optionsButton.setPreferredSize(new Dimension(140, 60));
         
-        textField = new JTextField("Your name here", 15);
+        textField = new JTextField("", 15);
+        textField.setBounds(138, 80, 171, 22);
+        canvas.setLayout(null);
               
-        canvas.add(playButton, BorderLayout.LINE_START);
-        canvas.add(optionsButton, BorderLayout.CENTER);
-        canvas.add(textField, BorderLayout.LINE_END);
+        canvas.add(playButton);
+        canvas.add(optionsButton);
+        canvas.add(textField);
+        
+        JLabel lblYourName = new JLabel("Your name:");
+        lblYourName.setBounds(64, 83, 76, 16);
+        canvas.add(lblYourName);
+        
+        JLabel lblDerpvivor = new JLabel("DERPVIVOR");
+        lblDerpvivor.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 20));
+        lblDerpvivor.setBounds(64, 33, 140, 34);
+        canvas.add(lblDerpvivor);
              
         playButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
